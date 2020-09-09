@@ -1,16 +1,20 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:Nivid/screens/home_screen.dart';
-import 'package:Nivid/screens/splash_screen.dart';
 
-void main() async {
+import 'package:Nivid/screens/home_screen.dart';
+
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setEnabledSystemUIOverlays([]);
-  await SystemChrome.setPreferredOrientations([
+  SystemChrome.setEnabledSystemUIOverlays([]);
+  SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  runApp(MyApp());
+  Future.delayed(Duration(seconds: 3), () {
+    SystemChrome.setEnabledSystemUIOverlays(
+        [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+    runApp(MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -23,7 +27,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepPurple,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SplashScreen(),
+      home: HomeScreen(),
       routes: {
         HomeScreen.routeName: (ctx) => HomeScreen(),
       },
