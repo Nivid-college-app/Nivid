@@ -1,9 +1,11 @@
+import 'package:Nivid/screens/decider_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 class MainDrawer extends StatelessWidget {
   static Size size;
   static double top;
+  static BuildContext ctx;
 
   Widget getDrawerButton(
       {@required String title,
@@ -17,9 +19,9 @@ class MainDrawer extends StatelessWidget {
         child: Row(
           children: [
             SizedBox(width: top * 0.75),
-            Icon(icon, size: 24, color: Colors.blue),
+            Icon(icon, size: 26),
             SizedBox(width: top),
-            Text(title, style: TextStyle(fontSize: 16, color: Colors.blue)),
+            Text(title, style: TextStyle(fontSize: 18)),
           ],
         ),
       ),
@@ -30,6 +32,7 @@ class MainDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
     top = MediaQuery.of(context).padding.top;
+    ctx = context;
     return Drawer(
       child: ListView(
         children: [
@@ -37,8 +40,13 @@ class MainDrawer extends StatelessWidget {
             contentPadding: EdgeInsets.only(left: size.width * 0.025),
             leading: CircleAvatar(
                 radius: size.width * 0.075,
-                backgroundImage: AssetImage('assets/images/app_icon.png')),
-            title: Text('IIIT Kottayam', style: TextStyle(fontSize: 18)),
+                backgroundImage: AssetImage('assets/images/iiitk.jpg')),
+            title: Text('IIIT Kottayam',
+                style: TextStyle(
+                    fontSize: 18,
+                    color: Theme.of(ctx).primaryColor,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.5)),
             subtitle:
                 Text('Hello there, welcome!', style: TextStyle(fontSize: 16)),
           ),
@@ -59,7 +67,8 @@ class MainDrawer extends StatelessWidget {
           getDrawerButton(
               title: 'Logout',
               icon: Icons.power_settings_new,
-              onPressed: () {}),
+              onPressed: () => Navigator.of(context).pushNamedAndRemoveUntil(
+                  DeciderScreen.routeName, (route) => false)),
           Divider(thickness: 1, height: 5),
           getDrawerButton(
               title: 'Help', icon: Icons.help_outline, onPressed: () {}),

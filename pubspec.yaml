@@ -32,10 +32,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  curved_navigation_bar: ^0.3.4
   flutter_launcher_icons: ^0.7.5
 
 flutter_icons:
-  android: true
+  android: false
   ios: true
   image_path: "assets/images/app_icon.png"
   adaptive_icon_background: "#FFFFFF"
