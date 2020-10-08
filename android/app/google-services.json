@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "33344796802",
+    "firebase_url": "https://nivid-5721c.firebaseio.com",
+    "project_id": "nivid-5721c",
+    "storage_bucket": "nivid-5721c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33344796802:android:6f4876c132c858c6591c9b",
+        "android_client_info": {
+          "package_name": "com.conclave.Nivid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "33344796802-o3vnruu2cm0k64rsms72rqo4ksnulj6u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.conclave.Nivid",
+            "certificate_hash": "5de0db083b1f10f32337eaaef2f6da3c11832e7e"
+          }
+        },
+        {
+          "client_id": "33344796802-0htc13muh42nhusp6qgh05ugjb9bjb32.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBb4I6O9WKKHxAmXEig5w5MiMph_it2XNE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "33344796802-0htc13muh42nhusp6qgh05ugjb9bjb32.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

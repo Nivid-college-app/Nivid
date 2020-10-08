@@ -1,4 +1,6 @@
 import 'dart:ui';
+import 'package:Nivid/helpers/custom_fade_route.dart';
+import 'package:Nivid/helpers/custome_scale_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
@@ -158,8 +160,9 @@ class _SignupScreenState extends State<SignupScreen> {
                         fit: BoxFit.scaleDown,
                         child: DefaultButtons.floatButton(context,
                             onTap: () => Navigator.of(context)
-                                .pushNamedAndRemoveUntil(
-                                    HomeScreen.routeName, (route) => false),
+                                .pushAndRemoveUntil(
+                                    CustomScaleRoute(HomeScreen()),
+                                    (route) => false),
                             color: Theme.of(context).primaryColor,
                             textColor: Colors.white,
                             title: 'Sign up',

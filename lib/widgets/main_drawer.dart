@@ -1,6 +1,6 @@
-import 'package:Nivid/screens/decider_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:Nivid/services/authentication.dart';
 
 class MainDrawer extends StatelessWidget {
   static Size size;
@@ -67,8 +67,7 @@ class MainDrawer extends StatelessWidget {
           getDrawerButton(
               title: 'Logout',
               icon: Icons.power_settings_new,
-              onPressed: () => Navigator.of(context).pushNamedAndRemoveUntil(
-                  DeciderScreen.routeName, (route) => false)),
+              onPressed: () => Authentication.logout(context)),
           Divider(thickness: 1, height: 5),
           getDrawerButton(
               title: 'Help', icon: Icons.help_outline, onPressed: () {}),

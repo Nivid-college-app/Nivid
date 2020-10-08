@@ -1,10 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:Nivid/screens/home_screen.dart';
 import 'package:Nivid/screens/login_screen.dart';
 import 'package:Nivid/screens/signup_screen.dart';
 import 'package:Nivid/screens/decider_screen.dart';
+
+User _firebaseuser;
+FirebaseApp firebaseApp;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,10 +18,14 @@ void main() {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  Future.delayed(Duration(seconds: 3), () {
-    SystemChrome.setEnabledSystemUIOverlays(
-        [SystemUiOverlay.top, SystemUiOverlay.bottom]);
-    runApp(MyApp());
+  Firebase.initializeApp().then((value) {
+    firebaseApp = value;
+    _firebaseuser = FirebaseAuth.instance.currentUser;
+    Future.delayed(Duration(seconds: 2), () {
+      SystemChrome.setEnabledSystemUIOverlays(
+          [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+      runApp(MyApp());
+    });
   });
 }
 
@@ -32,7 +41,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: HomeScreen(),
-      initialRoute: DeciderScreen.routeName,
+      initialRoute: _firebaseuser == null ? DeciderScreen.routeName : null,
       routes: {
         HomeScreen.routeName: (ctx) => HomeScreen(),
         LoginScreen.routeName: (ctx) => LoginScreen(),

@@ -1,10 +1,11 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
-import 'package:Nivid/screens/home_screen.dart';
 import 'package:Nivid/screens/login_screen.dart';
 import 'package:Nivid/screens/signup_screen.dart';
 import 'package:Nivid/global/default_buttons.dart';
+import 'package:Nivid/services/authentication.dart';
+import 'package:Nivid/helpers/custome_slide_route.dart';
 
 class DeciderScreen extends StatelessWidget {
   static const routeName = 'DeciderScreen';
@@ -68,10 +69,8 @@ class DeciderScreen extends StatelessWidget {
                     ),
                     SizedBox(height: _top),
                     DefaultButtons.floatButton(context,
-                        onTap: () => Navigator.of(context).push(
-                            PageRouteBuilder(
-                                pageBuilder: (context, _, __) => LoginScreen(),
-                                opaque: false)),
+                        onTap: () => Navigator.of(context)
+                            .push(CustomSlideRoute(LoginScreen())),
                         title: 'Sign in',
                         width: 55,
                         height: 10),
@@ -85,10 +84,8 @@ class DeciderScreen extends StatelessWidget {
                                 color: Color.fromRGBO(199, 211, 212, 1)))),
                     SizedBox(height: _top * 0.5),
                     DefaultButtons.floatButton(context,
-                        onTap: () => Navigator.of(context).push(
-                            PageRouteBuilder(
-                                pageBuilder: (context, _, __) => SignupScreen(),
-                                opaque: false)),
+                        onTap: () => Navigator.of(context)
+                            .push(CustomSlideRoute(SignupScreen())),
                         width: 50,
                         height: 10,
                         title: 'Sign up'),
@@ -131,8 +128,7 @@ class DeciderScreen extends StatelessWidget {
                     ),
                     SizedBox(height: _top),
                     DefaultButtons.floatButton(context,
-                        onTap: () => Navigator.of(context)
-                            .pushReplacementNamed(HomeScreen.routeName),
+                        onTap: () => Authentication.googleSignin(context),
                         title: 'Sign in',
                         width: 15,
                         height: 10,
