@@ -7,9 +7,7 @@ import 'package:Nivid/screens/home_screen.dart';
 import 'package:Nivid/screens/login_screen.dart';
 import 'package:Nivid/screens/signup_screen.dart';
 import 'package:Nivid/screens/decider_screen.dart';
-
-User _firebaseuser;
-FirebaseApp firebaseApp;
+import 'package:Nivid/global/variables.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +18,7 @@ void main() {
   ]);
   Firebase.initializeApp().then((value) {
     firebaseApp = value;
-    _firebaseuser = FirebaseAuth.instance.currentUser;
+    firebaseuser = FirebaseAuth.instance.currentUser;
     Future.delayed(Duration(seconds: 2), () {
       SystemChrome.setEnabledSystemUIOverlays(
           [SystemUiOverlay.top, SystemUiOverlay.bottom]);
@@ -37,11 +35,11 @@ class MyApp extends StatelessWidget {
       title: 'Nivid',
       theme: ThemeData(
         primaryColor: Color.fromRGBO(122, 0, 204, 1),
-        accentColor: Color.fromRGBO(204, 102, 255, 1),
+        // accentColor: Color.fromRGBO(204, 102, 255, 1),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: HomeScreen(),
-      initialRoute: _firebaseuser == null ? DeciderScreen.routeName : null,
+      // initialRoute: _firebaseuser == null ? DeciderScreen.routeName : null,
       routes: {
         HomeScreen.routeName: (ctx) => HomeScreen(),
         LoginScreen.routeName: (ctx) => LoginScreen(),

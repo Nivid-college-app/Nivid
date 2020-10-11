@@ -1,3 +1,4 @@
+import 'package:Nivid/providers/student.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:Nivid/services/authentication.dart';
@@ -37,7 +38,7 @@ class MainDrawer extends StatelessWidget {
       child: ListView(
         children: [
           ListTile(
-            contentPadding: EdgeInsets.only(left: size.width * 0.025),
+            contentPadding: EdgeInsets.only(left: size.width * 0.025, top: top),
             leading: CircleAvatar(
                 radius: size.width * 0.075,
                 backgroundImage: AssetImage('assets/images/iiitk.jpg')),
@@ -57,17 +58,15 @@ class MainDrawer extends StatelessWidget {
               onPressed: () {}),
           Divider(thickness: 1, height: 5),
           getDrawerButton(
-              title: 'Schedule',
-              icon: FlutterIcons.timetable_mco,
-              onPressed: () {}),
-          Divider(thickness: 1, height: 5),
-          getDrawerButton(
               title: 'Settings', icon: Icons.settings, onPressed: () {}),
           Divider(thickness: 1, height: 5),
           getDrawerButton(
               title: 'Logout',
               icon: Icons.power_settings_new,
               onPressed: () => Authentication.logout(context)),
+          Divider(thickness: 1, height: 5),
+          getDrawerButton(
+              title: 'About us', icon: Icons.person, onPressed: () {}),
           Divider(thickness: 1, height: 5),
           getDrawerButton(
               title: 'Help', icon: Icons.help_outline, onPressed: () {}),

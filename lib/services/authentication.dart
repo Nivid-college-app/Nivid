@@ -38,10 +38,12 @@ class Authentication {
         await FirebaseFirestore.instance
             .collection('students')
             .doc(_firebaseUser.uid)
-            .set(student.toJson()..['sd'] = FieldValue.serverTimestamp());
+            .set(student.toJson()..['sd'] = FieldValue.serverTimestamp(),
+                SetOptions(merge: true));
         await _googleSignIn.signOut();
-        Navigator.of(context).pushReplacement(
-            CustomSlideRoute(HomeScreen(), begin: Offset(1.0, 0)));
+        Navigator.of(context).pushAndRemoveUntil(
+            CustomSlideRoute(HomeScreen(), begin: Offset(1.0, 0)),
+            (route) => false);
         Fluttertoast.showToast(
             msg: 'Successfully logged in!',
             backgroundColor: Colors.grey[800],

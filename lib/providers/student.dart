@@ -22,7 +22,7 @@ class Student with ChangeNotifier {
     this.name = doc['name'];
     this.email = doc['email'];
     this.college = doc['college'];
-    this.startDate = doc['sd'].toDate();
+    this.startDate = doc['sd']?.toDate();
     this.profileImageLink = doc['pil'];
   }
 
