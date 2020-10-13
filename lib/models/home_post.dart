@@ -73,10 +73,58 @@ List<HomePost> posts = [
       isText: true,
       videoLink: null,
       imagelinks: null,
-      userIdsLiked: ['1', '2', '7'],
-      userIdsDisliked: ['3', '4', '5', '6'],
+      userIdsLiked: ['1', '2', '5', '6' '7', '8', '9'],
+      userIdsDisliked: ['3', '4'],
       text:
           'Welcome to Nivid\nAn app to connect students accross all colleges around the world.',
+      description:
+          'I hope you like this new app! This app helps you a lot in your daily college life. Share app, support us, Thank you, Have a nice day.',
+      timePosted: DateTime(2020, 9, 15)),
+  HomePost(
+      id: '1',
+      uid: '1',
+      userName: 'IIIT Kottayam admin',
+      userImageLink: null,
+      isVideo: true,
+      isText: false,
+      videoLink:
+          'https://player.vimeo.com/external/374176493.sd.mp4?s=c13d56141ab075639f96da8f3800b32b5f51bef6&profile_id=139&oauth2_token_id=57447761',
+      imagelinks: null,
+      userIdsLiked: ['1', '2', '7'],
+      userIdsDisliked: ['3', '4', '5', '6'],
+      text: null,
+      description:
+          'A song for entertainment.\n😍I hope you enjoy it, Have a good day\nAll is well!',
+      timePosted: DateTime(2020, 9, 15)),
+  HomePost(
+      id: '1',
+      uid: '1',
+      userName: 'IIIT Kottayam admin',
+      userImageLink: null,
+      isVideo: true,
+      isText: false,
+      videoLink:
+          'https://player.vimeo.com/external/363012285.sd.mp4?s=f9f1082e164fa9ce78dba9beb858cae8afaa108c&profile_id=139&oauth2_token_id=57447761',
+      imagelinks: null,
+      userIdsLiked: ['1', '2', '7'],
+      userIdsDisliked: ['3', '4', '5', '6'],
+      text: null,
+      description:
+          'A song for entertainment.\n😍I hope you enjoy it, Have a good day\nAll is well!',
+      timePosted: DateTime(2020, 9, 15)),
+  HomePost(
+      id: '1',
+      uid: '1',
+      userName: 'IIIT Kottayam admin',
+      userImageLink: null,
+      isVideo: true,
+      isText: false,
+      videoLink:
+          'https://player.vimeo.com/external/459124841.sd.mp4?s=367e9855780d54c05c257587aae710b7028add35&profile_id=165&oauth2_token_id=57447761',
+      imagelinks: null,
+      userIdsLiked: ['1', '2', '7'],
+      userIdsDisliked: ['3', '4', '5', '6'],
+      text: null,
       description: 'A song for entertainment.\n😍\nEnjoy!',
       timePosted: DateTime(2020, 9, 15)),
   HomePost(
@@ -87,7 +135,7 @@ List<HomePost> posts = [
       isVideo: true,
       isText: false,
       videoLink:
-          'https://firebasestorage.googleapis.com/v0/b/nivid-5721c.appspot.com/o/tempVideos%2FUFF%20Full%20Video%20-%20BANG%20BANG!%20-%20Hrithik%20Roshan%20%26%20Katrina%20Kaif%20-%20HD.mp4?alt=media&token=fac2f9f8-3e72-46da-a8eb-05c098f7e089',
+          'https://player.vimeo.com/external/363013785.sd.mp4?s=1d1a3b39ad78af16c346cbff77895dd0f28ddc67&profile_id=139&oauth2_token_id=57447761',
       imagelinks: null,
       userIdsLiked: ['1', '2', '7'],
       userIdsDisliked: ['3', '4', '5', '6'],
@@ -103,8 +151,9 @@ List<HomePost> posts = [
       isText: false,
       videoLink: null,
       imagelinks: [
-        'https://firebasestorage.googleapis.com/v0/b/nivid-5721c.appspot.com/o/tempVideos%2F26447186.jpg?alt=media&token=bf0f41c8-60c5-4e9f-9b1a-1daaadc3454e',
-        'https://firebasestorage.googleapis.com/v0/b/nivid-5721c.appspot.com/o/tempVideos%2FAutumn-Update-2012-pic1.jpg?alt=media&token=e53f461a-23f5-4cee-81db-a4e865923a82'
+        'https://cdn.mos.cms.futurecdn.net/gvQ9NhQP8wbbM32jXy4V3j.jpg',
+        'https://sarahfunky.com/wp-content/uploads/bb-plugin/cache/image-asset-panorama.jpeg',
+        'https://www.wallpapers13.com/wp-content/uploads/2016/05/Cameroon-West-Africa-green-landscape-red-sky-sunset-Desktop-Wallpaper-full-screen-1680x1050.jpg '
       ],
       userIdsLiked: ['1', '2', '7'],
       userIdsDisliked: ['3', '4', '5', '6'],
@@ -120,14 +169,81 @@ List<HomePost> posts = [
       isText: false,
       videoLink: null,
       imagelinks: [
-        'https://firebasestorage.googleapis.com/v0/b/nivid-5721c.appspot.com/o/tempVideos%2Fathirapally-waterfalls-kerala.jpg?alt=media&token=a526c255-756a-4f0d-8da0-57f24ae18761',
-        'https://firebasestorage.googleapis.com/v0/b/nivid-5721c.appspot.com/o/tempVideos%2Fmunnar-hill-station-kerala.jpg?alt=media&token=b2bf8ea9-2476-429c-9fb8-2ff3c135d476',
-        'https://firebasestorage.googleapis.com/v0/b/nivid-5721c.appspot.com/o/tempVideos%2Fpexels-photo-257360.jpeg?alt=media&token=38823ada-10c4-4dde-a546-26c6eefc3baf',
-        'https://firebasestorage.googleapis.com/v0/b/nivid-5721c.appspot.com/o/tempVideos%2Fpexels-photo-356977.jpeg?alt=media&token=b87eb0ac-3e6c-4e9f-aed8-d07b67e0abfd'
+        'https://www.digitalphotomentor.com/photography/2014/04/sunset-white-balance-06.jpg',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTYlxt-NGCMQ5yL8wVnn9FVcjOL1xGC6wUhxA&usqp=CAU',
+        'https://images.unsplash.com/photo-1503949042290-cdd68d518962?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+        'https://us.123rf.com/450wm/grigory_bruev/grigory_bruev1509/grigory_bruev150900154/45289404-sky-bright-blue-orange-and-yellow-colors-sunset-instant-photo-toned-image-gradient-background.jpg?ver=6'
       ],
       userIdsLiked: ['1', '2', '7'],
       userIdsDisliked: ['3', '4', '5', '6'],
       text: null,
       description: 'Some cool nature photos.\n😍\nEnjoy!',
-      timePosted: DateTime(2020, 9, 15))
+      timePosted: DateTime(2020, 9, 15)),
+  HomePost(
+      id: '1',
+      uid: '1',
+      userName: 'IIIT Kottayam admin',
+      userImageLink: null,
+      isVideo: true,
+      isText: false,
+      videoLink:
+          'https://player.vimeo.com/external/297927806.sd.mp4?s=0f0a0de1d75bff9f84fa992d7a5253dedc4f35d6&profile_id=164&oauth2_token_id=57447761',
+      imagelinks: null,
+      userIdsLiked: ['1', '2', '7'],
+      userIdsDisliked: ['3', '4', '5', '6'],
+      text: null,
+      description: 'A song for entertainment.\n😍\nEnjoy!',
+      timePosted: DateTime(2020, 9, 15)),
+  HomePost(
+      id: '1',
+      uid: '1',
+      userName: 'IIIT Kottayam photography',
+      userImageLink: null,
+      isVideo: false,
+      isText: false,
+      videoLink: null,
+      imagelinks: [
+        'https://cdn.mos.cms.futurecdn.net/gvQ9NhQP8wbbM32jXy4V3j.jpg',
+        'https://sarahfunky.com/wp-content/uploads/bb-plugin/cache/image-asset-panorama.jpeg',
+        'https://www.wallpapers13.com/wp-content/uploads/2016/05/Cameroon-West-Africa-green-landscape-red-sky-sunset-Desktop-Wallpaper-full-screen-1680x1050.jpg '
+      ],
+      userIdsLiked: ['1', '2', '7'],
+      userIdsDisliked: ['3', '4', '5', '6'],
+      text: null,
+      description: 'Some cool nature photos.\n😍\nEnjoy!',
+      timePosted: DateTime(2020, 9, 15)),
+  HomePost(
+      id: '1',
+      uid: '1',
+      userName: 'IIIT Kottayam photography',
+      userImageLink: null,
+      isVideo: false,
+      isText: false,
+      videoLink: null,
+      imagelinks: [
+        'https://www.digitalphotomentor.com/photography/2014/04/sunset-white-balance-06.jpg',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTYlxt-NGCMQ5yL8wVnn9FVcjOL1xGC6wUhxA&usqp=CAU',
+        'https://images.unsplash.com/photo-1503949042290-cdd68d518962?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+        'https://us.123rf.com/450wm/grigory_bruev/grigory_bruev1509/grigory_bruev150900154/45289404-sky-bright-blue-orange-and-yellow-colors-sunset-instant-photo-toned-image-gradient-background.jpg?ver=6'
+      ],
+      userIdsLiked: ['1', '2', '7'],
+      userIdsDisliked: ['3', '4', '5', '6'],
+      text: null,
+      description: 'Some cool nature photos.\n😍\nEnjoy!',
+      timePosted: DateTime(2020, 9, 15)),
+  HomePost(
+      id: '1',
+      uid: '1',
+      userName: 'IIIT Kottayam admin',
+      userImageLink: null,
+      isVideo: true,
+      isText: false,
+      videoLink:
+          'https://player.vimeo.com/external/314714772.sd.mp4?s=b3d92ace8cc000fb98770b2e59ade626f98ce642&profile_id=164&oauth2_token_id=57447761',
+      imagelinks: null,
+      userIdsLiked: ['1', '2', '7'],
+      userIdsDisliked: ['3', '4', '5', '6'],
+      text: null,
+      description: 'A song for entertainment.\n😍\nEnjoy!',
+      timePosted: DateTime(2020, 9, 15)),
 ];

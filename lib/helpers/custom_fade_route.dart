@@ -11,7 +11,7 @@ class CustomFadeRoute extends PageRouteBuilder {
     this.opaque = false,
     this.alignment = Alignment.bottomLeft,
     this.curve = Curves.easeInOut,
-    this.duration = const Duration(milliseconds: 300),
+    this.duration = const Duration(milliseconds: 350),
   }) : super(
             transitionDuration: duration,
             transitionsBuilder:

@@ -1,3 +1,7 @@
+import 'package:Nivid/screens/gallery_screen.dart';
+import 'package:Nivid/screens/home_feed_screen.dart';
+import 'package:Nivid/screens/mess_screen.dart';
+import 'package:Nivid/screens/news_feed_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
@@ -35,16 +39,19 @@ class MyApp extends StatelessWidget {
       title: 'Nivid',
       theme: ThemeData(
         primaryColor: Color.fromRGBO(122, 0, 204, 1),
-        // accentColor: Color.fromRGBO(204, 102, 255, 1),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: HomeScreen(),
-      // initialRoute: _firebaseuser == null ? DeciderScreen.routeName : null,
+      // initialRoute: firebaseuser == null ? DeciderScreen.routeName : null,
       routes: {
         HomeScreen.routeName: (ctx) => HomeScreen(),
+        DeciderScreen.routeName: (ctx) => DeciderScreen(),
         LoginScreen.routeName: (ctx) => LoginScreen(),
         SignupScreen.routeName: (ctx) => SignupScreen(),
-        DeciderScreen.routeName: (ctx) => DeciderScreen(),
+        HomeFeedScreen.routeName: (ctx) => HomeFeedScreen(),
+        NewsFeedScreen.routeName: (ctx) => NewsFeedScreen(),
+        MessScreen.routeName: (ctx) => MessScreen(),
+        GalleryScreen.routeName: (ctx) => GalleryScreen(),
       },
     );
   }

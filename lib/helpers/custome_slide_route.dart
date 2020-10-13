@@ -13,7 +13,7 @@ class CustomSlideRoute extends PageRouteBuilder {
     this.begin = const Offset(0.0, 1.0),
     this.end = Offset.zero,
     this.curve = Curves.easeInOut,
-    this.duration = const Duration(milliseconds: 250),
+    this.duration = const Duration(milliseconds: 350),
   }) : super(
             transitionDuration: duration,
             transitionsBuilder:

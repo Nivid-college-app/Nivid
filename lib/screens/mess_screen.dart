@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MessScreen extends StatelessWidget {
+  static const routeName = 'MessScreen';
   @override
   Widget build(BuildContext context) {
     return Container(

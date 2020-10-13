@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selected = 0;
+  int _selected = 1;
   int _count = 0;
   Size _size;
   List<Widget> tabs = [
@@ -57,7 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       },
       child: Scaffold(
-        appBar: AppBar(title: Text(['Home','News','Mess','Gallery'][_selected]),),
+        backgroundColor: Colors.white,
+        appBar:
+            AppBar(title: Text(['Home', 'News', 'Mess', 'Gallery'][_selected])),
         drawer: MainDrawer(),
         body: tabs[_selected],
         bottomNavigationBar: CurvedNavigationBar(
@@ -89,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       );
                     })
-                : Icon(FlutterIcons.home_ant, color: Colors.blueGrey[300]),
+                : Icon(FlutterIcons.home_ant, color: Colors.white),
             _selected == 1
                 ? FutureBuilder(
                     future: Future.delayed(Duration(milliseconds: 150)),
@@ -112,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       );
                     })
-                : Icon(FlutterIcons.newspaper_mco, color: Colors.blueGrey[300]),
+                : Icon(FlutterIcons.newspaper_mco, color: Colors.white),
             _selected == 2
                 ? FutureBuilder(
                     future: Future.delayed(Duration(milliseconds: 150)),
@@ -134,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       );
                     })
-                : Icon(Icons.restaurant_menu, color: Colors.blueGrey[300]),
+                : Icon(Icons.restaurant_menu, color: Colors.white),
             _selected == 3
                 ? FutureBuilder(
                     future: Future.delayed(Duration(milliseconds: 150)),
@@ -157,10 +159,20 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       );
                     })
-                : Icon(FlutterIcons.google_photos_mco,
-                    color: Colors.blueGrey[300]),
+                : Icon(FlutterIcons.google_photos_mco, color: Colors.white),
           ],
         ),
+        floatingActionButton: _selected == 0
+            ? FloatingActionButton.extended(
+                label: Text(
+                  'Add post',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                onPressed: () {},
+                icon: Icon(Icons.add),
+                backgroundColor: Theme.of(context).primaryColor,
+              )
+            : null,
       ),
     );
   }

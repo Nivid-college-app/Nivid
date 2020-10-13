@@ -1,6 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:video_player/video_player.dart';
 import 'package:Nivid/models/home_post.dart';
+
+bool muteVolume = true;
 
 class VideoPost extends StatefulWidget {
   final HomePost post;
@@ -12,7 +17,6 @@ class VideoPost extends StatefulWidget {
 class _VideoPostState extends State<VideoPost> {
   VideoPlayerController _videoController;
   Future<void> _initVideoPlayer;
-  bool _playing = false;
 
   @override
   void initState() {
@@ -20,6 +24,8 @@ class _VideoPostState extends State<VideoPost> {
     _videoController = VideoPlayerController.network(widget.post.videoLink);
     _initVideoPlayer = _videoController.initialize();
     _videoController.setLooping(true);
+    muteVolume ? _videoController.setVolume(0) : _videoController.setVolume(1);
+    _videoController.setPlaybackSpeed(1.0);
   }
 
   @override
@@ -30,26 +36,171 @@ class _VideoPostState extends State<VideoPost> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _initVideoPlayer,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return AspectRatio(
-              aspectRatio: _videoController.value.aspectRatio,
-              child: GestureDetector(
-                  onTap: () {
-                    _playing
-                        ? _videoController.pause()
-                        : _videoController.play();
-                    _playing = !_playing;
-                  },
-                  child: VideoPlayer(_videoController)));
-        }
-        return Container(
-          height: 250,
-          child: Center(child: CircularProgressIndicator()),
-        );
-      },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(15),
+        child: FutureBuilder(
+          future: _initVideoPlayer,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              _videoController.play();
+              return Stack(
+                alignment: Alignment.center,
+                children: [
+                  AspectRatio(
+                      aspectRatio: _videoController.value.aspectRatio,
+                      child: VideoPlayer(_videoController)),
+                  MuteOrUnmuteControl(videoController: _videoController),
+                  PlayOrPauseControl(videoController: _videoController),
+                ],
+              );
+            }
+            return Container(
+              height: 250,
+              child: Center(child: CircularProgressIndicator()),
+            );
+          },
+        ),
+      ),
     );
+  }
+}
+
+class PlayOrPauseControl extends StatefulWidget {
+  const PlayOrPauseControl({
+    @required this.videoController,
+  });
+  final VideoPlayerController videoController;
+
+  @override
+  _PlayOrPauseControlState createState() => _PlayOrPauseControlState();
+}
+
+class _PlayOrPauseControlState extends State<PlayOrPauseControl> {
+  bool _playing = true;
+  Timer _timer;
+  double _opacity = 1;
+
+  void _playOrPauseVideo() {
+    setState(() {
+      _playing = !_playing;
+      _opacity = 1;
+    });
+    _timer = Timer(Duration(milliseconds: 500), () {
+      setState(() {
+        _opacity = 0;
+      });
+      _timer.cancel();
+    });
+    _playing ? widget.videoController.play() : widget.videoController.pause();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer(Duration(milliseconds: 500), () {
+      setState(() {
+        _opacity = 0;
+      });
+      _timer.cancel();
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _timer.cancel();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedOpacity(
+      opacity: _opacity,
+      duration: Duration(milliseconds: 350),
+      child: IconButton(
+          iconSize: 55,
+          splashColor: Colors.transparent,
+          alignment: Alignment.center,
+          padding: EdgeInsets.zero,
+          color: Colors.white,
+          icon: Icon(_playing ? Icons.play_arrow : Icons.pause),
+          onPressed: _playOrPauseVideo),
+    );
+  }
+}
+
+class MuteOrUnmuteControl extends StatefulWidget {
+  MuteOrUnmuteControl({
+    @required this.videoController,
+  });
+
+  final VideoPlayerController videoController;
+
+  @override
+  _MuteOrUnmuteControlState createState() => _MuteOrUnmuteControlState();
+}
+
+class _MuteOrUnmuteControlState extends State<MuteOrUnmuteControl> {
+  Timer _timer;
+  double _opacity = 1;
+
+  void _muteOrUnmuteVolume() {
+    if (widget.videoController.value.isPlaying) {
+      setState(() {
+        muteVolume = !muteVolume;
+        _opacity = 1;
+      });
+      _timer = Timer(Duration(seconds: 3), () {
+        setState(() {
+          _opacity = 0;
+        });
+        _timer.cancel();
+      });
+      muteVolume
+          ? widget.videoController.setVolume(0)
+          : widget.videoController.setVolume(1);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer(Duration(seconds: 3), () {
+      setState(() {
+        _opacity = 0;
+      });
+      _timer.cancel();
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _timer.cancel();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+        bottom: 4,
+        left: 4,
+        child: AnimatedOpacity(
+          opacity: _opacity,
+          duration: Duration(milliseconds: 350),
+          child: CircleAvatar(
+            radius: 14,
+            backgroundColor: Colors.grey[800],
+            child: IconButton(
+                iconSize: 12,
+                splashColor: Colors.transparent,
+                alignment: Alignment.center,
+                color: Colors.white,
+                icon: Icon(muteVolume
+                    ? FlutterIcons.volume_mute_faw5s
+                    : FlutterIcons.volume_up_faw5s),
+                onPressed: _muteOrUnmuteVolume)
+          )
+        ));
   }
 }

@@ -17,45 +17,50 @@ class _ImagePostState extends State<ImagePost> {
   @override
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
-    return CarouselSlider(
-      items: widget.post.imagelinks
-          .map(
-            (image) => Stack(
-              alignment: Alignment.center,
-              children: [
-                FadeInImage(
-                    fit: BoxFit.contain,
-                    alignment: Alignment.center,
-                    placeholder: AssetImage('assets/images/app_icon.png'),
-                    image: NetworkImage(image)),
-                Positioned(
-                    top: 0,
-                    right: 0,
-                    child: Card(
-                      color: Colors.black87,
-                      margin: EdgeInsets.all(10.0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text(
-                            '${ind + 1} / ${widget.post.imagelinks.length}',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                            textAlign: TextAlign.center),
-                      ),
-                    ))
-              ],
-            ),
-          )
-          .toList(),
-      options: CarouselOptions(
-          initialPage: 0,
-          viewportFraction: 1.0,
-          onPageChanged: (index, reason) {
-            setState(() {
-              ind = index;
-            });
-          }),
+    return Stack(
+      children: [
+        CarouselSlider(
+          items: widget.post.imagelinks
+              .map(
+                (image) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: FadeInImage(
+                        fit: BoxFit.fill,
+                        width: size.width,
+                        alignment: Alignment.center,
+                        placeholder:
+                            AssetImage('assets/images/placeholder.webp'),
+                        image: NetworkImage(image)),
+                  ),
+                ),
+              )
+              .toList(),
+          options: CarouselOptions(
+              initialPage: 0,
+              viewportFraction: 1.0,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  ind = index;
+                });
+              }),
+        ),
+        Positioned(
+            top: 4,
+            right: 4,
+            child: Card(
+              color: Colors.black87,
+              margin: EdgeInsets.all(10.0),
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Text('${ind + 1} / ${widget.post.imagelinks.length}',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center),
+              ),
+            ))
+      ],
     );
   }
 }
