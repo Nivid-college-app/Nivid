@@ -1,10 +1,10 @@
-import 'package:Nivid/widgets/main_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 import 'package:Nivid/screens/mess_screen.dart';
+import 'package:Nivid/widgets/main_drawer.dart';
 import 'package:Nivid/screens/gallery_screen.dart';
 import 'package:Nivid/screens/home_feed_screen.dart';
 import 'package:Nivid/screens/news_feed_screen.dart';

@@ -1,6 +1,6 @@
-import 'package:Nivid/providers/student.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+
 import 'package:Nivid/services/authentication.dart';
 
 class MainDrawer extends StatelessWidget {

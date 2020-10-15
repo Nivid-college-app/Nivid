@@ -1,8 +1,8 @@
-import 'package:Nivid/models/home_post.dart';
-import 'package:Nivid/widgets/post_trailing.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
+import 'package:Nivid/models/home_post.dart';
 
 class PostLeading extends StatefulWidget {
   final HomePost post;
