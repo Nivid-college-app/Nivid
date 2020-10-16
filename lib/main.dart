@@ -5,13 +5,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:Nivid/global/variables.dart';
 import 'package:Nivid/screens/mess_screen.dart';
-import 'package:Nivid/screens/home_screen.dart';
 import 'package:Nivid/screens/login_screen.dart';
 import 'package:Nivid/screens/signup_screen.dart';
 import 'package:Nivid/screens/decider_screen.dart';
 import 'package:Nivid/screens/gallery_screen.dart';
 import 'package:Nivid/screens/home_feed_screen.dart';
 import 'package:Nivid/screens/news_feed_screen.dart';
+import 'package:Nivid/screens/bottom_tabs_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,15 +36,17 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Nivid',
       theme: ThemeData(
-        primaryColor: Color.fromRGBO(122, 0, 204, 1),
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: DeciderScreen(),
-      // home: HomeScreen(),
-      // initialRoute: HomeScreen.routeName,
+          primaryColor: Color.fromRGBO(122, 0, 204, 1),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          appBarTheme: AppBarTheme(
+              centerTitle: true,
+              textTheme: TextTheme(
+                  headline6: TextStyle(
+                      // fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.bold,fontSize: 20)))),
+      home: BottomTabsScreen(),
       // initialRoute: firebaseuser == null ? DeciderScreen.routeName : null,
       routes: {
-        HomeScreen.routeName: (ctx) => HomeScreen(),
         DeciderScreen.routeName: (ctx) => DeciderScreen(),
         LoginScreen.routeName: (ctx) => LoginScreen(),
         SignupScreen.routeName: (ctx) => SignupScreen(),
@@ -52,6 +54,7 @@ class MyApp extends StatelessWidget {
         NewsFeedScreen.routeName: (ctx) => NewsFeedScreen(),
         MessScreen.routeName: (ctx) => MessScreen(),
         GalleryScreen.routeName: (ctx) => GalleryScreen(),
+        BottomTabsScreen.routeName: (ctx) => BottomTabsScreen(),
       },
     );
   }

@@ -37,7 +37,9 @@ class _PostTrailingState extends State<PostTrailing> {
             splashColor: Colors.transparent,
             color: _liked ? Theme.of(context).primaryColor : null,
             icon: Icon(
-              _liked ? Icons.thumb_up : FlutterIcons.thumb_up_outline_mco,
+              _liked
+                  ? FlutterIcons.thumbs_up_faw
+                  : FlutterIcons.thumbs_o_up_faw,
             ),
             onPressed: _onLike),
         Text('${widget.post.userIdsLiked.length}'),
@@ -47,8 +49,8 @@ class _PostTrailingState extends State<PostTrailing> {
             color: _disLiked ? Theme.of(context).primaryColor : null,
             icon: Icon(
               _disLiked
-                  ? Icons.thumb_down
-                  : FlutterIcons.thumb_down_outline_mco,
+                  ? FlutterIcons.thumbs_down_faw
+                  : FlutterIcons.thumbs_o_down_faw,
             ),
             onPressed: _onDislike),
         Text('${widget.post.userIdsDisliked.length}'),

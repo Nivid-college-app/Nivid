@@ -3,9 +3,9 @@ import 'package:Nivid/helpers/custome_scale_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
-import 'package:Nivid/screens/home_screen.dart';
 import 'package:Nivid/global/default_buttons.dart';
 import 'package:Nivid/global/default_decorations.dart';
+import 'package:Nivid/screens/bottom_tabs_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = 'LoginScreen';
@@ -118,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: DefaultButtons.floatButton(context,
                             onTap: () => Navigator.of(context)
                                 .pushAndRemoveUntil(
-                                    CustomScaleRoute(HomeScreen()),
+                                    CustomScaleRoute(BottomTabsScreen()),
                                     (route) => false),
                             color: Theme.of(context).primaryColor,
                             textColor: Colors.white,

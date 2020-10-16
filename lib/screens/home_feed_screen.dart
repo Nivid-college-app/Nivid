@@ -1,10 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:Nivid/models/home_post.dart';
+import 'package:Nivid/widgets/text_post.dart';
+import 'package:Nivid/widgets/video_post.dart';
 import 'package:Nivid/widgets/image_post.dart';
 import 'package:Nivid/widgets/post_leading.dart';
 import 'package:Nivid/widgets/post_trailing.dart';
-import 'package:Nivid/widgets/text_post.dart';
-import 'package:flutter/material.dart';
-import 'package:Nivid/models/home_post.dart';
-import 'package:Nivid/widgets/video_post.dart';
 
 class HomeFeedScreen extends StatelessWidget {
   static const routeName = 'HomeFeedScreen';
@@ -25,10 +25,10 @@ class HomeFeedScreen extends StatelessWidget {
               );
             if (index == posts.length + 1)
               return Padding(
-                padding: const EdgeInsets.only(top: 30, bottom: 80),
+                padding: const EdgeInsets.only(top: 30, bottom: 120),
                 child: Align(
-                  alignment: Alignment.center,
-                  child: Text('That\'s all for the day!\nThank you',
+                  alignment: Alignment.topCenter,
+                  child: Text('No more posts!\nThank you',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Theme.of(context).primaryColor,

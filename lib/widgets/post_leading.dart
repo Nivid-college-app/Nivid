@@ -1,7 +1,6 @@
-import 'package:intl/intl.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
+import 'package:Nivid/global/methods.dart';
 import 'package:Nivid/models/home_post.dart';
 
 class PostLeading extends StatefulWidget {
@@ -21,14 +20,7 @@ class _PostLeadingState extends State<PostLeading> {
   @override
   void initState() {
     super.initState();
-    final postTime = widget.post.timePosted;
-    _time = DateTime.now().difference(postTime) < Duration(hours: 1)
-        ? DateTime.now().difference(postTime).inMinutes.toString() +
-            ' minutes ago'
-        : DateTime.now().difference(postTime) < Duration(hours: 12)
-            ? DateTime.now().difference(postTime).inHours.toString() +
-                ' hours ago'
-            : '${DateFormat('dd MMMM yyyy').format(postTime)}';
+    _time = convertDateToReadableString(widget.post.timePosted);
     if (widget.post.description.split('\n').length == 1) {
       _desc = widget.post.description.split('\n')[0];
     } else if (widget.post.description.split('\n').length > 1)

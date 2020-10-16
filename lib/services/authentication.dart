@@ -6,9 +6,9 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:Nivid/providers/student.dart';
-import 'package:Nivid/screens/home_screen.dart';
 import 'package:Nivid/screens/decider_screen.dart';
 import 'package:Nivid/global/default_dialog_box.dart';
+import 'package:Nivid/screens/bottom_tabs_screen.dart';
 import 'package:Nivid/helpers/custome_slide_route.dart';
 
 class Authentication {
@@ -42,7 +42,7 @@ class Authentication {
                 SetOptions(merge: true));
         await _googleSignIn.signOut();
         Navigator.of(context).pushAndRemoveUntil(
-            CustomSlideRoute(HomeScreen(), begin: Offset(1.0, 0)),
+            CustomSlideRoute(BottomTabsScreen(), begin: Offset(1.0, 0)),
             (route) => false);
         Fluttertoast.showToast(
             msg: 'Successfully logged in!',

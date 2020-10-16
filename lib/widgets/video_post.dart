@@ -151,7 +151,7 @@ class _MuteOrUnmuteControlState extends State<MuteOrUnmuteControl> {
         muteVolume = !muteVolume;
         _opacity = 1;
       });
-      _timer = Timer(Duration(seconds: 3), () {
+      _timer = Timer(Duration(seconds: 1, milliseconds: 500), () {
         setState(() {
           _opacity = 0;
         });
@@ -166,7 +166,7 @@ class _MuteOrUnmuteControlState extends State<MuteOrUnmuteControl> {
   @override
   void initState() {
     super.initState();
-    _timer = Timer(Duration(seconds: 3), () {
+    _timer = Timer(Duration(seconds: 1, milliseconds: 500), () {
       setState(() {
         _opacity = 0;
       });
@@ -186,21 +186,19 @@ class _MuteOrUnmuteControlState extends State<MuteOrUnmuteControl> {
         bottom: 4,
         left: 4,
         child: AnimatedOpacity(
-          opacity: _opacity,
-          duration: Duration(milliseconds: 350),
-          child: CircleAvatar(
-            radius: 14,
-            backgroundColor: Colors.grey[800],
-            child: IconButton(
-                iconSize: 12,
-                splashColor: Colors.transparent,
-                alignment: Alignment.center,
-                color: Colors.white,
-                icon: Icon(muteVolume
-                    ? FlutterIcons.volume_mute_faw5s
-                    : FlutterIcons.volume_up_faw5s),
-                onPressed: _muteOrUnmuteVolume)
-          )
-        ));
+            opacity: _opacity,
+            duration: Duration(milliseconds: 350),
+            child: CircleAvatar(
+                radius: 14,
+                backgroundColor: Colors.grey[800],
+                child: IconButton(
+                    iconSize: 12,
+                    splashColor: Colors.transparent,
+                    alignment: Alignment.center,
+                    color: Colors.white,
+                    icon: Icon(muteVolume
+                        ? FlutterIcons.volume_mute_faw5s
+                        : FlutterIcons.volume_up_faw5s),
+                    onPressed: _muteOrUnmuteVolume))));
   }
 }
