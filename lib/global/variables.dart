@@ -16,10 +16,10 @@ List<String> dummyImageLinks = [
 ];
 
 List<String> dummyVideoLinks = [
+  'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4?_=1',
   'https://player.vimeo.com/external/374176493.sd.mp4?s=c13d56141ab075639f96da8f3800b32b5f51bef6&profile_id=139&oauth2_token_id=57447761',
   'https://player.vimeo.com/external/363012285.sd.mp4?s=f9f1082e164fa9ce78dba9beb858cae8afaa108c&profile_id=139&oauth2_token_id=57447761',
   'https://player.vimeo.com/external/459124841.sd.mp4?s=367e9855780d54c05c257587aae710b7028add35&profile_id=165&oauth2_token_id=57447761',
   'https://player.vimeo.com/external/363013785.sd.mp4?s=1d1a3b39ad78af16c346cbff77895dd0f28ddc67&profile_id=139&oauth2_token_id=57447761',
-  'https://player.vimeo.com/external/297927806.sd.mp4?s=0f0a0de1d75bff9f84fa992d7a5253dedc4f35d6&profile_id=164&oauth2_token_id=57447761',
   'https://player.vimeo.com/external/314714772.sd.mp4?s=b3d92ace8cc000fb98770b2e59ade626f98ce642&profile_id=164&oauth2_token_id=57447761',
 ];

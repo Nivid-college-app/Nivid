@@ -37,15 +37,15 @@ class MyApp extends StatelessWidget {
       title: 'Nivid',
       theme: ThemeData(
           primaryColor: Color.fromRGBO(122, 0, 204, 1),
+          accentColor: Colors.amber,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           appBarTheme: AppBarTheme(
               centerTitle: true,
               textTheme: TextTheme(
-                  headline6: TextStyle(
-                      // fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.bold,fontSize: 20)))),
+                  headline6:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 20)))),
       home: BottomTabsScreen(),
-      // initialRoute: firebaseuser == null ? DeciderScreen.routeName : null,
+      initialRoute: firebaseuser == null ? DeciderScreen.routeName : null,
       routes: {
         DeciderScreen.routeName: (ctx) => DeciderScreen(),
         LoginScreen.routeName: (ctx) => LoginScreen(),

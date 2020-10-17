@@ -94,7 +94,7 @@ List<HomePost> posts = [
       userIdsDisliked: ['3', '4', '5', '6'],
       text: null,
       description:
-          'A song for entertainment.\n😍I hope you enjoy it, Have a good day\nAll is well!',
+          'A demo video.\n😍I hope you enjoy it, Have a good day\nAll is well!',
       timePosted: DateTime.now().subtract(Duration(minutes: 1))),
   HomePost(
       id: '1',
@@ -109,7 +109,7 @@ List<HomePost> posts = [
       userIdsDisliked: ['3', '4', '5', '6'],
       text: null,
       description:
-          'A song for entertainment.\n😍I hope you enjoy it, Have a good day\nAll is well!',
+          'A demo video.\n😍I hope you enjoy it, Have a good day\nAll is well!',
       timePosted: DateTime.now().subtract(Duration(minutes: 30))),
   HomePost(
       id: '1',
@@ -123,7 +123,7 @@ List<HomePost> posts = [
       userIdsLiked: ['1', '2', '7'],
       userIdsDisliked: ['3', '4', '5', '6'],
       text: null,
-      description: 'A song for entertainment.\n😍\nEnjoy!',
+      description: 'A demo video.\n😍\nEnjoy!',
       timePosted: DateTime.now().subtract(Duration(minutes: 30, hours: 1))),
   HomePost(
       id: '1',
@@ -137,7 +137,7 @@ List<HomePost> posts = [
       userIdsLiked: ['1', '2', '7'],
       userIdsDisliked: ['3', '4', '5', '6'],
       text: null,
-      description: 'A song for entertainment.\n😍\nEnjoy!',
+      description: 'A demo video.\n😍\nEnjoy!',
       timePosted: DateTime.now().subtract(Duration(days: 1, hours: 3))),
   HomePost(
       id: '1',
@@ -179,7 +179,7 @@ List<HomePost> posts = [
       userIdsLiked: ['1', '2', '7'],
       userIdsDisliked: ['3', '4', '5', '6'],
       text: null,
-      description: 'A song for entertainment.\n😍\nEnjoy!',
+      description: 'A demo video.\n😍\nEnjoy!',
       timePosted: DateTime.now().subtract(Duration(days: 21))),
   HomePost(
       id: '1',

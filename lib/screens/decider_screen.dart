@@ -17,6 +17,7 @@ class DeciderScreen extends StatelessWidget {
     _size = MediaQuery.of(context).size;
     _top = MediaQuery.of(context).padding.top;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         width: _size.width,
         height: _size.height,
