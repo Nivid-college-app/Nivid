@@ -13,6 +13,7 @@ class HomePost {
   List<String> userIdsLiked;
   List<String> userIdsDisliked;
   String text;
+  List<String> additionalLinks;
   String description;
   DateTime timePosted;
 
@@ -28,6 +29,7 @@ class HomePost {
       @required this.userIdsLiked,
       @required this.userIdsDisliked,
       @required this.text,
+      this.additionalLinks,
       @required this.description,
       @required this.timePosted});
 
@@ -43,6 +45,7 @@ class HomePost {
     this.userIdsLiked = doc['uidLks'];
     this.userIdsDisliked = doc['uidDlks'];
     this.text = doc['text'];
+    this.additionalLinks = doc['addLnks'];
     this.description = doc['desc'];
     this.timePosted = doc['tp']?.toDate();
   }
@@ -59,6 +62,7 @@ class HomePost {
         'uidLks': this.userIdsLiked,
         'uidDlks': this.userIdsDisliked,
         'text': this.text,
+        'addLnks': this.additionalLinks,
         'desc': this.description,
         'tp': this.timePosted,
       };

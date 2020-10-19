@@ -5,7 +5,7 @@ import 'package:Nivid/screens/login_screen.dart';
 import 'package:Nivid/screens/signup_screen.dart';
 import 'package:Nivid/global/default_buttons.dart';
 import 'package:Nivid/services/authentication.dart';
-import 'package:Nivid/helpers/custome_slide_route.dart';
+import 'package:Nivid/helpers/custom_slide_route.dart';
 
 class DeciderScreen extends StatelessWidget {
   static const routeName = 'DeciderScreen';

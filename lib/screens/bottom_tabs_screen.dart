@@ -17,7 +17,7 @@ class BottomTabsScreen extends StatefulWidget {
 }
 
 class _BottomTabsScreenState extends State<BottomTabsScreen> {
-  int _selected = 2;
+  int _selected = 1;
   int _count = 0;
   Size _size;
   List<Widget> tabs = [
@@ -183,11 +183,10 @@ class _BottomTabsScreenState extends State<BottomTabsScreen> {
                   bottom: 70,
                   right: 5,
                   child: FloatingActionButton.extended(
-                    label: Text(
-                      'Add post',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
+                    foregroundColor: Colors.white,
+                    label: Text('Add post',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold)),
                     onPressed: () {},
                     icon: Icon(Icons.add),
                     backgroundColor: Theme.of(context).primaryColor,

@@ -9,7 +9,7 @@ import 'package:Nivid/providers/student.dart';
 import 'package:Nivid/screens/decider_screen.dart';
 import 'package:Nivid/global/default_dialog_box.dart';
 import 'package:Nivid/screens/bottom_tabs_screen.dart';
-import 'package:Nivid/helpers/custome_slide_route.dart';
+import 'package:Nivid/helpers/custom_slide_route.dart';
 
 class Authentication {
   static Future<void> googleSignin(BuildContext context) async {

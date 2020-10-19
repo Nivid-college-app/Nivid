@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:Nivid/helpers/custome_scale_route.dart';
+import 'package:Nivid/helpers/custom_scale_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 

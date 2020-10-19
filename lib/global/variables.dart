@@ -13,6 +13,14 @@ List<String> dummyImageLinks = [
   'https://images.unsplash.com/photo-1503949042290-cdd68d518962?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
   'https://us.123rf.com/450wm/grigory_bruev/grigory_bruev1509/grigory_bruev150900154/45289404-sky-bright-blue-orange-and-yellow-colors-sunset-instant-photo-toned-image-gradient-background.jpg?ver=6',
   'https://cdn.mos.cms.futurecdn.net/gvQ9NhQP8wbbM32jXy4V3j.jpg',
+  'https://i.gadgets360cdn.com/large/google_trusted_contacts_gp_1481270688477.jpg?downsize=950:*&output-quality=80&output-format=webp',
+  'https://i.gadgets360cdn.com/large/samsung_galaxy_s20_plus_ultra_front_gadgets_360_1581447548079.jpg?downsize=950:*&output-quality=80&output-format=webp',
+  'https://akm-img-a-in.tosshub.com/indiatoday/images/story/202010/Screenshot_2020-04-28_at_2.04._1200x768.png?xUrx9XaTo31_8EUr1Wm2Ww66t7.PI61b&size=770:433',
+  'https://akm-img-a-in.tosshub.com/sites/btmt/images/stories/pubg_game_660_141020121948.jpg',
+  'https://akm-img-a-in.tosshub.com/sites/btmt/images/stories/flipkart_sale_660_131020032954.jpg',
+  'https://akm-img-a-in.tosshub.com/sites/btmt/images/stories/google_660_121020123600.jpg',
+  'https://akm-img-a-in.tosshub.com/indiatoday/images/story/202010/Sony_PS5_India_1200x768.png?I0bokud3Lzjyy5NYQ2HFzqQfuGIE.nFd&size=770:433',
+  'https://akm-img-a-in.tosshub.com/indiatoday/images/story/202010/Screenshot_2020-10-17_at_5.23._1200x768.png?W2zF6nuIJ5BQWSHdHTaJsuNpvnzYh8IH&size=770:433',
 ];
 
 List<String> dummyVideoLinks = [

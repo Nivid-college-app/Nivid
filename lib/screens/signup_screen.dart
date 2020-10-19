@@ -5,7 +5,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:Nivid/global/default_buttons.dart';
 import 'package:Nivid/screens/bottom_tabs_screen.dart';
 import 'package:Nivid/global/default_decorations.dart';
-import 'package:Nivid/helpers/custome_scale_route.dart';
+import 'package:Nivid/helpers/custom_scale_route.dart';
 
 class SignupScreen extends StatefulWidget {
   static const routeName = 'SignupScreen';

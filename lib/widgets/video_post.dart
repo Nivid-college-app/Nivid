@@ -51,7 +51,8 @@ class _VideoPostState extends State<VideoPost> {
                   AspectRatio(
                       aspectRatio: _videoController.value.aspectRatio,
                       child: VideoPlayer(_videoController)),
-                  MuteOrUnmuteControl(videoController: _videoController),
+                  MuteOrUnmuteControl(
+                      videoController: _videoController, left: 4, bottom: 4),
                   PlayOrPauseControl(videoController: _videoController),
                 ],
               );
@@ -68,9 +69,7 @@ class _VideoPostState extends State<VideoPost> {
 }
 
 class PlayOrPauseControl extends StatefulWidget {
-  const PlayOrPauseControl({
-    @required this.videoController,
-  });
+  const PlayOrPauseControl({@required this.videoController});
   final VideoPlayerController videoController;
 
   @override
@@ -118,24 +117,42 @@ class _PlayOrPauseControlState extends State<PlayOrPauseControl> {
     return AnimatedOpacity(
       opacity: _opacity,
       duration: Duration(milliseconds: 350),
-      child: IconButton(
-          iconSize: 55,
-          splashColor: Colors.transparent,
-          alignment: Alignment.center,
-          padding: EdgeInsets.zero,
-          color: Colors.white,
-          icon: Icon(_playing ? Icons.play_arrow : Icons.pause),
-          onPressed: _playOrPauseVideo),
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 700),
+        height: _opacity == 0 ? 55 : 75,
+        width: _opacity == 0 ? 55 : 75,
+        alignment: Alignment.center,
+        padding: EdgeInsets.all(12),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50), color: Colors.black45),
+        child: FittedBox(
+          child: IconButton(
+              iconSize: 75,
+              splashColor: Colors.transparent,
+              alignment: Alignment.center,
+              padding: EdgeInsets.zero,
+              color: Colors.white,
+              icon: Icon(_playing ? Icons.play_arrow : Icons.pause),
+              onPressed: _playOrPauseVideo),
+        ),
+      ),
     );
   }
 }
 
 class MuteOrUnmuteControl extends StatefulWidget {
-  MuteOrUnmuteControl({
-    @required this.videoController,
-  });
+  MuteOrUnmuteControl(
+      {@required this.videoController,
+      this.left,
+      this.bottom,
+      this.right,
+      this.top});
 
   final VideoPlayerController videoController;
+  final double left;
+  final double right;
+  final double top;
+  final double bottom;
 
   @override
   _MuteOrUnmuteControlState createState() => _MuteOrUnmuteControlState();
@@ -183,8 +200,10 @@ class _MuteOrUnmuteControlState extends State<MuteOrUnmuteControl> {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-        bottom: 4,
-        left: 4,
+        bottom: widget.bottom,
+        left: widget.left,
+        right: widget.right,
+        top: widget.top,
         child: AnimatedOpacity(
             opacity: _opacity,
             duration: Duration(milliseconds: 350),
