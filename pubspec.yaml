@@ -94,6 +94,14 @@ flutter:
           weight: 300
         - asset: assets/fonts/Quicksand-Bold.ttf
           weight: 700
+    - family: JosefiSans
+      fonts:
+        - asset: assets/fonts/JosefinSans-Regular.ttf
+        - asset: assets/fonts/JosefinSans-Medium.ttf
+        - asset: assets/fonts/JosefinSans-Italic.ttf
+          style: italic
+        - asset: assets/fonts/JosefinSans-Bold.ttf
+          weight: 700
     - family: Raleway
       fonts:
         - asset: assets/fonts/Raleway-Regular.ttf
@@ -101,19 +109,12 @@ flutter:
           weight: 700
         - asset: assets/fonts/Raleway-Black.ttf
           weight: 900
-    - family: Lato
-      fonts:
-        - asset: assets/fonts/Lato-Regular.ttf
-        - asset: assets/fonts/Lato-Bold.ttf
-          weight: 700
-    - family: OpensSans
-      fonts:
-        - asset: assets/fonts/OpenSans-Regular.ttf
-        - asset: assets/fonts/OpenSans-Bold.ttf
-          weight: 700
     - family: AbrilFatface
       fonts:
         - asset: assets/fonts/AbrilFatface-Regular.ttf
+    - family: BreeSerif
+      fonts:
+        - asset: assets/fonts/BreeSerif-Regular.ttf
     - family: Anton
       fonts:
         - asset: assets/fonts/Anton-Regular.ttf

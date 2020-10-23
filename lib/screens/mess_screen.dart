@@ -25,6 +25,115 @@ class _MessScreenState extends State<MessScreen> {
       _selected = 0;
   }
 
+  TextStyle _dayTextStyle(int index) {
+    return TextStyle(
+        color: _day == index ? Colors.white : Colors.black,
+        fontSize: 16,
+        fontFamily: 'JosefiSans',
+        fontWeight: FontWeight.w600);
+  }
+
+  Widget _getTabViewWidget() {
+    return ListView.builder(
+      physics: BouncingScrollPhysics(),
+      itemCount: messMenuItems.length + 1,
+      itemBuilder: (context, index) {
+        if (index == messMenuItems.length)
+          return Padding(
+            padding:
+                const EdgeInsets.only(left: 10, right: 10, bottom: 90, top: 20),
+            child: FloatingActionButton.extended(
+                backgroundColor: Theme.of(context).primaryColor,
+                label: Text('Give your precious review.',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                icon: Icon(Icons.rate_review, size: 28),
+                onPressed: () {}),
+          );
+        return MessItem(messMenuItems[index]);
+      },
+    );
+  }
+
+  Widget _daySelectGrid(BuildContext ctx) {
+    return ListView(
+      shrinkWrap: true,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 30, top: 30),
+          child: Text('Select day : ',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                  fontFamily: 'JosefiSans',
+                  fontWeight: FontWeight.bold)),
+        ),
+        GridView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 1.75, crossAxisCount: 3),
+            itemBuilder: (context, index) => GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _day = index;
+                    });
+                    Navigator.pop(ctx);
+                  },
+                  child: Container(
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    padding: const EdgeInsets.all(8),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                            colors: _day == index
+                                ? [
+                                    Theme.of(context)
+                                        .primaryColor
+                                        .withOpacity(0.5),
+                                    Theme.of(context)
+                                        .primaryColor
+                                        .withOpacity(0.7),
+                                    Theme.of(context)
+                                        .primaryColor
+                                        .withOpacity(0.9),
+                                  ]
+                                : [
+                                    Theme.of(context)
+                                        .accentColor
+                                        .withOpacity(0.5),
+                                    Theme.of(context)
+                                        .accentColor
+                                        .withOpacity(0.7),
+                                    Theme.of(context)
+                                        .accentColor
+                                        .withOpacity(0.9),
+                                  ],
+                            tileMode: TileMode.mirror),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black26,
+                              offset: Offset(0, 3),
+                              blurRadius: 3)
+                        ],
+                        color: _day == index
+                            ? Theme.of(context).primaryColor
+                            : Colors.grey[350],
+                        borderRadius: BorderRadius.circular(30)),
+                    child: Text(
+                      DateFormat('EEEE')
+                          .format(DateTime.now().add(Duration(days: index))),
+                      style: _dayTextStyle(index),
+                    ),
+                  ),
+                ),
+            itemCount: 7),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     _size = MediaQuery.of(context).size;
@@ -42,7 +151,7 @@ class _MessScreenState extends State<MessScreen> {
                             borderRadius: BorderRadius.vertical(
                                 top: Radius.circular(30))),
                         context: context,
-                        builder: (ctx) => daySelectGrid(ctx)),
+                        builder: (ctx) => _daySelectGrid(ctx)),
                     child: Container(
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
@@ -65,8 +174,7 @@ class _MessScreenState extends State<MessScreen> {
                           Text(
                               DateFormat('EEEE').format(
                                   DateTime.now().add(Duration(days: _day))),
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 18)),
+                              style: _dayTextStyle(null)),
                           Icon(Icons.arrow_circle_down, color: Colors.blue),
                         ],
                       ),
@@ -76,12 +184,21 @@ class _MessScreenState extends State<MessScreen> {
                     margin: EdgeInsets.symmetric(horizontal: 8),
                     child: TabBar(
                       tabs: [
-                        getTabButton('Breakfast', 0),
-                        getTabButton('Lunch', 1),
-                        getTabButton('Dinner', 2),
+                        Container(
+                            child: FittedBox(child: Text('Breakfast')),
+                            padding: EdgeInsets.all(8)),
+                        Container(
+                            child: FittedBox(child: Text('Lunch')),
+                            padding: EdgeInsets.all(8)),
+                        Container(
+                            child: FittedBox(child: Text('Dinner')),
+                            padding: EdgeInsets.all(8)),
                       ],
-                      labelStyle:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      labelStyle: TextStyle(
+                          fontFamily: 'BreeSerif',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0.5),
                       labelColor: Colors.white,
                       unselectedLabelColor: Theme.of(context).accentColor,
                       indicator: BoxDecoration(
@@ -95,89 +212,11 @@ class _MessScreenState extends State<MessScreen> {
               preferredSize: Size(_size.width, _size.height * 0.145)),
           body: TabBarView(
             children: [
-              getTabViewWidget(),
-              getTabViewWidget(),
-              getTabViewWidget(),
+              _getTabViewWidget(),
+              _getTabViewWidget(),
+              _getTabViewWidget(),
             ],
           )),
     );
-  }
-
-  Container getTabButton(String title, int ind, {bool isMiddle = false}) {
-    return Container(
-        child: FittedBox(child: Text(title)), padding: EdgeInsets.all(8));
-  }
-
-  Widget getTabViewWidget() {
-    return ListView.builder(
-      physics: BouncingScrollPhysics(),
-      itemCount: messMenuItems.length + 1,
-      itemBuilder: (context, index) {
-        if (index == messMenuItems.length)
-          return Padding(
-            padding:
-                const EdgeInsets.only(left: 10, right: 10, bottom: 90, top: 20),
-            child: FloatingActionButton.extended(
-                backgroundColor: Theme.of(context).primaryColor,
-                label: Text('Give your precious review.',
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                icon: Icon(Icons.rate_review, size: 28),
-                onPressed: () {}),
-          );
-        return MessItem(messMenuItems[index]);
-      },
-    );
-  }
-
-  Widget daySelectGrid(BuildContext ctx) {
-    return GridView.builder(
-        physics: BouncingScrollPhysics(),
-        shrinkWrap: true,
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            childAspectRatio: 1.75, crossAxisCount: 3),
-        itemBuilder: (context, index) => GestureDetector(
-              onTap: () {
-                setState(() {
-                  _day = index;
-                });
-                Navigator.pop(ctx);
-              },
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                padding: const EdgeInsets.all(8),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        colors: _day == index
-                            ? [
-                                Theme.of(context).primaryColor.withOpacity(0.5),
-                                Theme.of(context).primaryColor.withOpacity(0.7),
-                                Theme.of(context).primaryColor.withOpacity(0.9),
-                              ]
-                            : [
-                                Theme.of(context).accentColor.withOpacity(0.5),
-                                Theme.of(context).accentColor.withOpacity(0.7),
-                                Theme.of(context).accentColor.withOpacity(0.9),
-                                // Theme.of(context).accentColor.withOpacity(0.9),
-                                // Theme.of(context).accentColor.withOpacity(0.8),
-                                // Theme.of(context).accentColor.withOpacity(0.7),
-                              ],
-                        tileMode: TileMode.mirror),
-                    color: _day == index
-                        ? Theme.of(context).primaryColor
-                        : Colors.grey[350],
-                    borderRadius: BorderRadius.circular(30)),
-                child: Text(
-                  DateFormat('EEEE')
-                      .format(DateTime.now().add(Duration(days: index))),
-                  style: TextStyle(
-                      color: _day == index ? Colors.white : Colors.black,
-                      fontSize: 16),
-                ),
-              ),
-            ),
-        itemCount: 7);
   }
 }

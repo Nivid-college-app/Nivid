@@ -79,7 +79,7 @@ class Authentication {
       await FirebaseAuth.instance.signOut();
       Navigator.pop(context);
       Navigator.of(context).pushAndRemoveUntil(
-          CustomSlideRoute(DeciderScreen(), begin: Offset(0.0, -1.0)),
+          CustomSlideRoute(DeciderScreen(), begin: Offset(0, -1)),
           (route) => false);
       Fluttertoast.showToast(
           msg: 'Successfully logged out!',

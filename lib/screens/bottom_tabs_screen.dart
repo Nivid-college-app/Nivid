@@ -7,17 +7,22 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:Nivid/screens/mess_screen.dart';
 import 'package:Nivid/widgets/main_drawer.dart';
 import 'package:Nivid/screens/gallery_screen.dart';
+import 'package:Nivid/screens/add_news_screen.dart';
+import 'package:Nivid/screens/add_post_screen.dart';
 import 'package:Nivid/screens/home_feed_screen.dart';
 import 'package:Nivid/screens/news_feed_screen.dart';
+import 'package:Nivid/helpers/custom_scale_route.dart';
 
 class BottomTabsScreen extends StatefulWidget {
   static const routeName = 'HomeScreen';
+  final int index;
+  BottomTabsScreen({this.index = 0});
   @override
   _BottomTabsScreenState createState() => _BottomTabsScreenState();
 }
 
 class _BottomTabsScreenState extends State<BottomTabsScreen> {
-  int _selected = 1;
+  int _selected;
   int _count = 0;
   Size _size;
   List<Widget> tabs = [
@@ -36,6 +41,7 @@ class _BottomTabsScreenState extends State<BottomTabsScreen> {
   @override
   void initState() {
     super.initState();
+    _selected = widget.index;
     _count = 0;
   }
 
@@ -178,16 +184,19 @@ class _BottomTabsScreenState extends State<BottomTabsScreen> {
                 ],
               ),
             ),
-            if (_selected == 0)
+            if (_selected == 0 || _selected == 1)
               Positioned(
                   bottom: 70,
                   right: 5,
                   child: FloatingActionButton.extended(
                     foregroundColor: Colors.white,
-                    label: Text('Add post',
+                    label: Text(_selected == 0 ? 'Add post' : 'Update',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold)),
-                    onPressed: () {},
+                    onPressed: () => Navigator.of(context).push(
+                        CustomScaleRoute(
+                            _selected == 0 ? AddPostScreen() : AddNewsScreen(),
+                            alignment: Alignment.bottomRight)),
                     icon: Icon(Icons.add),
                     backgroundColor: Theme.of(context).primaryColor,
                   ))

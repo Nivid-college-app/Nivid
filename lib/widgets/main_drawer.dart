@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
+import 'package:Nivid/helpers/custom_slide_route.dart';
+import 'package:Nivid/screens/academics_screen.dart';
 import 'package:Nivid/services/authentication.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -55,10 +57,11 @@ class MainDrawer extends StatelessWidget {
           getDrawerButton(
               title: 'Academics',
               icon: FlutterIcons.school_mdi,
-              onPressed: () {}),
+              onPressed: () => Navigator.of(context).push(
+                  CustomSlideRoute(AcademicsScreen(), begin: Offset(1, 0)))),
           Divider(thickness: 1, height: 5),
           getDrawerButton(
-              title: 'Settings', icon: Icons.settings, onPressed: () {}),
+              title: 'Reset password', icon: Icons.settings, onPressed: () {}),
           Divider(thickness: 1, height: 5),
           getDrawerButton(
               title: 'Logout',

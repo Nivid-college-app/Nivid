@@ -80,15 +80,18 @@ class _PlayOrPauseControlState extends State<PlayOrPauseControl> {
   bool _playing = true;
   Timer _timer;
   double _opacity = 1;
+  bool _isPressed = false;
 
   void _playOrPauseVideo() {
     setState(() {
       _playing = !_playing;
       _opacity = 1;
+      _isPressed = true;
     });
     _timer = Timer(Duration(milliseconds: 500), () {
       setState(() {
         _opacity = 0;
+        _isPressed = false;
       });
       _timer.cancel();
     });
@@ -117,23 +120,19 @@ class _PlayOrPauseControlState extends State<PlayOrPauseControl> {
     return AnimatedOpacity(
       opacity: _opacity,
       duration: Duration(milliseconds: 350),
-      child: AnimatedContainer(
-        duration: Duration(milliseconds: 700),
-        height: _opacity == 0 ? 55 : 75,
-        width: _opacity == 0 ? 55 : 75,
-        alignment: Alignment.center,
-        padding: EdgeInsets.all(12),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50), color: Colors.black45),
-        child: FittedBox(
-          child: IconButton(
-              iconSize: 75,
-              splashColor: Colors.transparent,
-              alignment: Alignment.center,
-              padding: EdgeInsets.zero,
-              color: Colors.white,
-              icon: Icon(_playing ? Icons.play_arrow : Icons.pause),
-              onPressed: _playOrPauseVideo),
+      child: GestureDetector(
+        onTap: _playOrPauseVideo,
+        child: AnimatedContainer(
+          duration: Duration(milliseconds: 850),
+          height: _isPressed ? 65 : 45,
+          width: _isPressed ? 65 : 45,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50), color: Colors.black45),
+          child: FittedBox(
+            child: Icon(_playing ? Icons.play_arrow : Icons.pause,
+                color: Colors.white),
+          ),
         ),
       ),
     );

@@ -9,6 +9,9 @@ import 'package:Nivid/screens/login_screen.dart';
 import 'package:Nivid/screens/signup_screen.dart';
 import 'package:Nivid/screens/decider_screen.dart';
 import 'package:Nivid/screens/gallery_screen.dart';
+import 'package:Nivid/screens/add_news_screen.dart';
+import 'package:Nivid/screens/add_post_screen.dart';
+import 'package:Nivid/screens/academics_screen.dart';
 import 'package:Nivid/screens/home_feed_screen.dart';
 import 'package:Nivid/screens/news_feed_screen.dart';
 import 'package:Nivid/screens/bottom_tabs_screen.dart';
@@ -43,8 +46,9 @@ class MyApp extends StatelessWidget {
               centerTitle: true,
               textTheme: TextTheme(
                   headline6:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 20)))),
-      home: BottomTabsScreen(),
+                      TextStyle(fontWeight: FontWeight.w500, fontSize: 20)))),
+      // home: BottomTabsScreen(),
+      home: AddPostScreen(),
       // initialRoute: firebaseuser == null ? DeciderScreen.routeName : null,
       routes: {
         DeciderScreen.routeName: (ctx) => DeciderScreen(),
@@ -55,6 +59,9 @@ class MyApp extends StatelessWidget {
         MessScreen.routeName: (ctx) => MessScreen(),
         GalleryScreen.routeName: (ctx) => GalleryScreen(),
         BottomTabsScreen.routeName: (ctx) => BottomTabsScreen(),
+        AcademicsScreen.routeName: (ctx) => AcademicsScreen(),
+        AddPostScreen.routeName: (ctx) => AddPostScreen(),
+        AddNewsScreen.routeName: (ctx) => AddNewsScreen(),
       },
     );
   }
