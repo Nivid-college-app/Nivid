@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:Nivid/providers/student.dart';
+import 'package:Nivid/providers/app_user.dart';
 import 'package:Nivid/screens/decider_screen.dart';
 import 'package:Nivid/global/default_dialog_box.dart';
 import 'package:Nivid/screens/bottom_tabs_screen.dart';
@@ -28,7 +28,7 @@ class Authentication {
         final UserCredential _userCredential =
             await FirebaseAuth.instance.signInWithCredential(_googleCredential);
         final _firebaseUser = _userCredential.user;
-        final student = Student(
+        final student = AppUser(
             id: _firebaseUser.uid,
             name:
                 _googleAccount.displayName ?? _firebaseUser.email.split('@')[0],

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-class User with ChangeNotifier {
+class AppUser with ChangeNotifier {
   String id;
   String name;
   String email;
@@ -8,7 +8,7 @@ class User with ChangeNotifier {
   DateTime startDate;
   String profileImageLink;
 
-  User(
+  AppUser(
       {@required this.id,
       @required this.name,
       @required this.email,
@@ -17,7 +17,7 @@ class User with ChangeNotifier {
       @required this.startDate,
       this.profileImageLink});
 
-  User.fromMap(Map<String, dynamic> doc) {
+  AppUser.fromMap(Map<String, dynamic> doc) {
     this.id = doc['id'];
     this.name = doc['name'];
     this.email = doc['email'];
