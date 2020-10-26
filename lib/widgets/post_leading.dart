@@ -59,37 +59,38 @@ class _PostLeadingState extends State<PostLeading> {
                 Text(_time, style: TextStyle(fontWeight: FontWeight.bold)),
             trailing:
                 IconButton(icon: Icon(Icons.more_vert), onPressed: () {})),
-        Container(
-          alignment: Alignment.centerLeft,
-          padding: EdgeInsets.only(left: 16, bottom: 8, right: 8),
-          child: _expanded
-              ? RichText(
-                  text: TextSpan(
-                      text: widget.post.description,
-                      style: TextStyle(color: Colors.black, fontSize: 14)))
-              : RichText(
-                  text: TextSpan(
-                      text: _size.width * 1.5 <=
-                                  widget.post.description.length * 6 &&
-                              widget.post.description.split('\n').length == 1
-                          ? _desc.substring(0, 100) + '...'
-                          : _desc,
-                      style: TextStyle(color: Colors.black, fontSize: 14),
-                      children: [
-                      if (_size.width * 1.5 <=
-                              widget.post.description.length * 6 ||
-                          widget.post.description.split('\n').length > 1)
-                        TextSpan(
-                            text: ' more',
-                            style: TextStyle(
-                                color: Theme.of(context)
-                                    .primaryColor
-                                    .withAlpha(125),
-                                fontWeight: FontWeight.bold,
-                                fontStyle: FontStyle.normal),
-                            recognizer: _recognizer)
-                    ])),
-        ),
+        if (widget.post.description != null)
+          Container(
+            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.only(left: 16, bottom: 8, right: 8),
+            child: _expanded
+                ? RichText(
+                    text: TextSpan(
+                        text: widget.post.description,
+                        style: TextStyle(color: Colors.black, fontSize: 14)))
+                : RichText(
+                    text: TextSpan(
+                        text: _size.width * 1.5 <=
+                                    widget.post.description.length * 6 &&
+                                widget.post.description.split('\n').length == 1
+                            ? _desc.substring(0, 100) + '...'
+                            : _desc,
+                        style: TextStyle(color: Colors.black, fontSize: 14),
+                        children: [
+                        if (_size.width * 1.5 <=
+                                widget.post.description.length * 6 ||
+                            widget.post.description.split('\n').length > 1)
+                          TextSpan(
+                              text: ' more',
+                              style: TextStyle(
+                                  color: Theme.of(context)
+                                      .primaryColor
+                                      .withAlpha(125),
+                                  fontWeight: FontWeight.bold,
+                                  fontStyle: FontStyle.normal),
+                              recognizer: _recognizer)
+                      ])),
+          ),
       ],
     );
   }

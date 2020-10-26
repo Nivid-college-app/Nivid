@@ -43,6 +43,12 @@
 	<false/>
 	<key>UIStatusBarHidden</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Request to access gallery</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Request to access camera</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Request to access microphone</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

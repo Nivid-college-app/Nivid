@@ -4,7 +4,7 @@ import 'package:Nivid/widgets/mess_item.dart';
 import 'package:Nivid/models/mess_menu_item.dart';
 
 class MessScreen extends StatefulWidget {
-  static const routeName = 'MessScreen';
+  static const routeName = '\MessScreen';
   @override
   _MessScreenState createState() => _MessScreenState();
 }
@@ -36,9 +36,20 @@ class _MessScreenState extends State<MessScreen> {
   Widget _getTabViewWidget() {
     return ListView.builder(
       physics: BouncingScrollPhysics(),
-      itemCount: messMenuItems.length + 1,
+      itemCount: messMenuItems.length + 2,
       itemBuilder: (context, index) {
-        if (index == messMenuItems.length)
+        if (index == 0)
+          return Container(
+            margin: EdgeInsets.only(left: 20,bottom: 10),
+            child: Text(
+                DefaultTabController.of(context).index == 0
+                    ? '7:00 AM - 8:30 AM'
+                    : DefaultTabController.of(context).index == 1
+                        ? '12:00 PM - 2:30 PM'
+                        : '7:00 PM - 9:00 PM',
+                style: TextStyle(color: Theme.of(context).primaryColor)),
+          );
+        if (index == messMenuItems.length + 1)
           return Padding(
             padding:
                 const EdgeInsets.only(left: 10, right: 10, bottom: 90, top: 20),
@@ -50,7 +61,7 @@ class _MessScreenState extends State<MessScreen> {
                 icon: Icon(Icons.rate_review, size: 28),
                 onPressed: () {}),
           );
-        return MessItem(messMenuItems[index]);
+        return MessItem(messMenuItems[index - 1]);
       },
     );
   }
@@ -186,13 +197,13 @@ class _MessScreenState extends State<MessScreen> {
                       tabs: [
                         Container(
                             child: FittedBox(child: Text('Breakfast')),
-                            padding: EdgeInsets.all(8)),
+                            padding: EdgeInsets.all(4)),
                         Container(
                             child: FittedBox(child: Text('Lunch')),
-                            padding: EdgeInsets.all(8)),
+                            padding: EdgeInsets.all(4)),
                         Container(
                             child: FittedBox(child: Text('Dinner')),
-                            padding: EdgeInsets.all(8)),
+                            padding: EdgeInsets.all(4)),
                       ],
                       labelStyle: TextStyle(
                           fontFamily: 'BreeSerif',
@@ -209,7 +220,7 @@ class _MessScreenState extends State<MessScreen> {
                   ),
                 ],
               ),
-              preferredSize: Size(_size.width, _size.height * 0.145)),
+              preferredSize: Size(_size.width, _size.height * 0.135)),
           body: TabBarView(
             children: [
               _getTabViewWidget(),

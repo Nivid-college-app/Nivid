@@ -5,7 +5,7 @@ import 'package:Nivid/widgets/news_feed_item.dart';
 import 'package:Nivid/global/default_decorations.dart';
 
 class NewsFeedScreen extends StatelessWidget {
-  static const routeName = 'NewsFeedScreen';
+  static const routeName = '\NewsFeedScreen';
   static Size size;
   final searchController = TextEditingController();
 

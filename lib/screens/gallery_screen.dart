@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class GalleryScreen extends StatefulWidget {
-  static const routeName = 'GalleryScreen';
+  static const routeName = '\GalleryScreen';
 
   @override
   _GalleryScreenState createState() => _GalleryScreenState();

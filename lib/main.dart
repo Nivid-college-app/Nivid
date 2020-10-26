@@ -49,6 +49,7 @@ class MyApp extends StatelessWidget {
                       TextStyle(fontWeight: FontWeight.w500, fontSize: 20)))),
       // home: BottomTabsScreen(),
       home: AddPostScreen(),
+      // home: AddNewsScreen(),
       // initialRoute: firebaseuser == null ? DeciderScreen.routeName : null,
       routes: {
         DeciderScreen.routeName: (ctx) => DeciderScreen(),

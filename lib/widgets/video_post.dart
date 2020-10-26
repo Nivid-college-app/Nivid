@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -9,7 +10,8 @@ bool muteVolume = true;
 
 class VideoPost extends StatefulWidget {
   final HomePost post;
-  VideoPost(this.post);
+  final File file;
+  VideoPost(this.post, {this.file});
   @override
   _VideoPostState createState() => _VideoPostState();
 }
@@ -21,7 +23,9 @@ class _VideoPostState extends State<VideoPost> {
   @override
   void initState() {
     super.initState();
-    _videoController = VideoPlayerController.network(widget.post.videoLink);
+    _videoController = widget.post != null
+        ? VideoPlayerController.network(widget.post.videoLink)
+        : VideoPlayerController.file(widget.file);
     _initVideoPlayer = _videoController.initialize();
     _videoController.setLooping(true);
     muteVolume ? _videoController.setVolume(0) : _videoController.setVolume(1);

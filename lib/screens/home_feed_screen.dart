@@ -7,7 +7,7 @@ import 'package:Nivid/widgets/post_leading.dart';
 import 'package:Nivid/widgets/post_trailing.dart';
 
 class HomeFeedScreen extends StatelessWidget {
-  static const routeName = 'HomeFeedScreen';
+  static const routeName = '\HomeFeedScreen';
 
   @override
   Widget build(BuildContext context) {

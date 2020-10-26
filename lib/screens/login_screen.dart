@@ -8,7 +8,7 @@ import 'package:Nivid/global/default_decorations.dart';
 import 'package:Nivid/screens/bottom_tabs_screen.dart';
 
 class LoginScreen extends StatefulWidget {
-  static const routeName = 'LoginScreen';
+  static const routeName = '\LoginScreen';
 
   @override
   _LoginScreenState createState() => _LoginScreenState();

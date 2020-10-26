@@ -14,7 +14,7 @@ import 'package:Nivid/screens/news_feed_screen.dart';
 import 'package:Nivid/helpers/custom_scale_route.dart';
 
 class BottomTabsScreen extends StatefulWidget {
-  static const routeName = 'HomeScreen';
+  static const routeName = '\BottomTabsScreen';
   final int index;
   BottomTabsScreen({this.index = 0});
   @override

@@ -5,7 +5,7 @@ import 'package:Nivid/widgets/video_post.dart';
 import 'package:video_player/video_player.dart';
 
 class NewsDetailScreen extends StatelessWidget {
-  static const routeName = 'NewsDetailScreen';
+  static const routeName = '\NewsDetailScreen';
   final NewsFeed feed;
   NewsDetailScreen(this.feed);
   static Size size;

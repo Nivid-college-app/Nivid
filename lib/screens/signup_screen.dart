@@ -8,7 +8,7 @@ import 'package:Nivid/global/default_decorations.dart';
 import 'package:Nivid/helpers/custom_scale_route.dart';
 
 class SignupScreen extends StatefulWidget {
-  static const routeName = 'SignupScreen';
+  static const routeName = '\SignupScreen';
 
   @override
   _SignupScreenState createState() => _SignupScreenState();

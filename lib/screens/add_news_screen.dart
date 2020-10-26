@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AddNewsScreen extends StatelessWidget {
-  static const routeName = 'AddNewsScreen';
+  static const routeName = '\AddNewsScreen';
   
   @override
   Widget build(BuildContext context) {
