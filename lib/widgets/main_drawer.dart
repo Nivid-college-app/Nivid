@@ -1,3 +1,4 @@
+import 'package:Nivid/global/variables.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
@@ -59,9 +60,12 @@ class MainDrawer extends StatelessWidget {
               icon: FlutterIcons.school_mdi,
               onPressed: () => Navigator.of(context).push(
                   CustomSlideRoute(AcademicsScreen(), begin: Offset(1, 0)))),
-          Divider(thickness: 1, height: 5),
-          getDrawerButton(
-              title: 'Reset password', icon: Icons.settings, onPressed: () {}),
+          if (userData.isAdmin) Divider(thickness: 1, height: 5),
+          if (userData.isAdmin)
+            getDrawerButton(
+                title: 'Reset password',
+                icon: Icons.settings,
+                onPressed: () {}),
           Divider(thickness: 1, height: 5),
           getDrawerButton(
               title: 'Logout',

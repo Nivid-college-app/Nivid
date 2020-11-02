@@ -2,10 +2,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import 'package:Nivid/screens/login_screen.dart';
-import 'package:Nivid/screens/signup_screen.dart';
+// import 'package:Nivid/screens/signup_screen.dart';
 import 'package:Nivid/global/default_buttons.dart';
 import 'package:Nivid/services/authentication.dart';
 import 'package:Nivid/helpers/custom_slide_route.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class DeciderScreen extends StatelessWidget {
   static const routeName = '\DeciderScreen';
@@ -85,8 +86,10 @@ class DeciderScreen extends StatelessWidget {
                                 color: Color.fromRGBO(199, 211, 212, 1)))),
                     SizedBox(height: _top * 0.5),
                     DefaultButtons.floatButton(context,
-                        onTap: () => Navigator.of(context)
-                            .push(CustomSlideRoute(SignupScreen())),
+                        onTap: () => Fluttertoast.showToast(
+                            msg: 'Currently not available'),
+                        // onTap: () => Navigator.of(context)
+                        //     .push(CustomSlideRoute(SignupScreen())),
                         width: 50,
                         height: 10,
                         title: 'Sign up'),

@@ -1,3 +1,4 @@
+import 'package:Nivid/global/variables.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -25,12 +26,6 @@ class _BottomTabsScreenState extends State<BottomTabsScreen> {
   int _selected;
   int _count = 0;
   Size _size;
-  List<Widget> tabs = [
-    HomeFeedScreen(),
-    NewsFeedScreen(),
-    MessScreen(),
-    GalleryScreen(),
-  ];
 
   void _onPressed(int index) {
     setState(() {
@@ -71,7 +66,12 @@ class _BottomTabsScreenState extends State<BottomTabsScreen> {
         drawer: MainDrawer(),
         body: Stack(
           children: [
-            tabs[_selected],
+            [
+              HomeFeedScreen(),
+              NewsFeedScreen(),
+              MessScreen(),
+              GalleryScreen()
+            ][_selected],
             Positioned(
               bottom: 0,
               left: 0,
@@ -79,7 +79,8 @@ class _BottomTabsScreenState extends State<BottomTabsScreen> {
               child: CurvedNavigationBar(
                 height: _size.height * 0.07,
                 animationDuration: Duration(milliseconds: 300),
-                color: Theme.of(context).primaryColor,
+                buttonBackgroundColor: Theme.of(context).primaryColor,
+                color: Theme.of(context).primaryColor.withOpacity(0.75),
                 backgroundColor: Colors.transparent,
                 onTap: _onPressed,
                 index: _selected,
@@ -184,7 +185,7 @@ class _BottomTabsScreenState extends State<BottomTabsScreen> {
                 ],
               ),
             ),
-            if (_selected == 0 || _selected == 1)
+            if ((_selected == 0 || _selected == 1) && userData.isAdmin)
               Positioned(
                   bottom: 70,
                   right: 5,

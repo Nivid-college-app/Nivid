@@ -81,7 +81,7 @@ class PlayOrPauseControl extends StatefulWidget {
 }
 
 class _PlayOrPauseControlState extends State<PlayOrPauseControl> {
-  bool _playing = true;
+  bool _playing;
   Timer _timer;
   double _opacity = 1;
   bool _isPressed = false;
@@ -105,6 +105,7 @@ class _PlayOrPauseControlState extends State<PlayOrPauseControl> {
   @override
   void initState() {
     super.initState();
+    _playing = widget.videoController.value.isPlaying;
     _timer = Timer(Duration(milliseconds: 500), () {
       setState(() {
         _opacity = 0;

@@ -1,5 +1,9 @@
+import 'package:Nivid/global/variables.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:Nivid/global/methods.dart';
 import 'package:Nivid/models/home_post.dart';
 
@@ -12,8 +16,6 @@ class PostLeading extends StatefulWidget {
 
 class _PostLeadingState extends State<PostLeading> {
   bool _expanded = false;
-  Size _size;
-  String _desc = '';
   String _time;
   TapGestureRecognizer _recognizer = TapGestureRecognizer();
 
@@ -21,14 +23,6 @@ class _PostLeadingState extends State<PostLeading> {
   void initState() {
     super.initState();
     _time = convertDateToReadableString(widget.post.timePosted);
-    if (widget.post.description.split('\n').length == 1) {
-      _desc = widget.post.description.split('\n')[0];
-    } else if (widget.post.description.split('\n').length > 1)
-      _desc = widget.post.description.split('\n')[0] +
-          '\n' +
-          widget.post.description.split('\n')[1].substring(0,
-              widget.post.description.split('\n')[1].length > 25 ? 25 : null) +
-          '...';
     _recognizer.onTap = () {
       setState(() {
         _expanded = true;
@@ -38,7 +32,6 @@ class _PostLeadingState extends State<PostLeading> {
 
   @override
   Widget build(BuildContext context) {
-    _size = MediaQuery.of(context).size;
     return Column(
       children: [
         ListTile(
@@ -57,39 +50,66 @@ class _PostLeadingState extends State<PostLeading> {
                 style: TextStyle(fontWeight: FontWeight.bold)),
             subtitle:
                 Text(_time, style: TextStyle(fontWeight: FontWeight.bold)),
-            trailing:
-                IconButton(icon: Icon(Icons.more_vert), onPressed: () {})),
+            trailing: userData.isAdmin
+                ? IconButton(icon: Icon(Icons.more_vert), onPressed: () {})
+                : null),
         if (widget.post.description != null)
           Container(
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.only(left: 16, bottom: 8, right: 8),
             child: _expanded
-                ? RichText(
-                    text: TextSpan(
+                ? Linkify(
+                    onOpen: (link) async {
+                      if (await canLaunch(link.url)) {
+                        await launch(link.url, enableJavaScript: true);
+                      } else {
+                        Fluttertoast.showToast(msg: 'Could not launch $link');
+                      }
+                    },
+                    text: widget.post.description,
+                    linkStyle: TextStyle(color: Colors.blue, fontSize: 15),
+                    style: TextStyle(color: Colors.black, fontSize: 15))
+                : widget.post.description.length > 100 ||
+                        widget.post.description.split('\n').length > 2
+                    ? RichText(
+                        text: TextSpan(
+                            text: widget.post.description.split('\n').length >
+                                        2 &&
+                                    (widget.post.description.split('\n')[0] +
+                                                widget.post.description
+                                                    .split('\n')[1])
+                                            .length <
+                                        100
+                                ? widget.post.description.split('\n')[0] +
+                                    '\n' +
+                                    widget.post.description.split('\n')[1] +
+                                    '...'
+                                : widget.post.description.substring(0, 100) +
+                                    '...',
+                            style: TextStyle(color: Colors.black),
+                            children: [
+                            TextSpan(
+                                text: ' more',
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .primaryColor
+                                        .withAlpha(125),
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FontStyle.normal),
+                                recognizer: _recognizer)
+                          ]))
+                    : Linkify(
+                        onOpen: (link) async {
+                          if (await canLaunch(link.url)) {
+                            await launch(link.url);
+                          } else {
+                            Fluttertoast.showToast(
+                                msg: 'Could not launch $link');
+                          }
+                        },
                         text: widget.post.description,
-                        style: TextStyle(color: Colors.black, fontSize: 14)))
-                : RichText(
-                    text: TextSpan(
-                        text: _size.width * 1.5 <=
-                                    widget.post.description.length * 6 &&
-                                widget.post.description.split('\n').length == 1
-                            ? _desc.substring(0, 100) + '...'
-                            : _desc,
-                        style: TextStyle(color: Colors.black, fontSize: 14),
-                        children: [
-                        if (_size.width * 1.5 <=
-                                widget.post.description.length * 6 ||
-                            widget.post.description.split('\n').length > 1)
-                          TextSpan(
-                              text: ' more',
-                              style: TextStyle(
-                                  color: Theme.of(context)
-                                      .primaryColor
-                                      .withAlpha(125),
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FontStyle.normal),
-                              recognizer: _recognizer)
-                      ])),
+                        linkStyle: TextStyle(color: Colors.blue, fontSize: 15),
+                        style: TextStyle(color: Colors.black, fontSize: 15)),
           ),
       ],
     );

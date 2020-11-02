@@ -19,24 +19,19 @@ class _ImagePostState extends State<ImagePost> {
     size = MediaQuery.of(context).size;
     return Stack(
       children: [
-        CarouselSlider(
-          items: widget.post.imagelinks
-              .map(
-                (image) => Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: FadeInImage(
-                        fit: BoxFit.fill,
-                        width: size.width,
-                        alignment: Alignment.center,
-                        placeholder:
-                            AssetImage('assets/images/placeholder.webp'),
-                        image: NetworkImage(image)),
-                  ),
-                ),
-              )
-              .toList(),
+        CarouselSlider.builder(
+          itemCount: widget.post.imagelinks.length,
+          itemBuilder: (context, index) => Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: FadeInImage(
+                    fit: BoxFit.fill,
+                    width: size.width,
+                    alignment: Alignment.center,
+                    placeholder: AssetImage('assets/images/placeholder.webp'),
+                    image: NetworkImage(widget.post.imagelinks[index]))),
+          ),
           options: CarouselOptions(
               initialPage: 0,
               viewportFraction: 1.0,

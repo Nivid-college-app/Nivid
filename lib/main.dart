@@ -1,3 +1,4 @@
+import 'package:Nivid/services/database.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -25,6 +26,9 @@ void main() async {
   ]);
   firebaseApp = await Firebase.initializeApp();
   firebaseuser = FirebaseAuth.instance.currentUser;
+  try {
+    await Database.getUserData();
+  } catch (_) {}
   await Future.delayed(Duration(seconds: 2), () {
     SystemChrome.setEnabledSystemUIOverlays(
         [SystemUiOverlay.top, SystemUiOverlay.bottom]);
@@ -47,10 +51,10 @@ class MyApp extends StatelessWidget {
               textTheme: TextTheme(
                   headline6:
                       TextStyle(fontWeight: FontWeight.w500, fontSize: 20)))),
-      // home: BottomTabsScreen(),
-      home: AddPostScreen(),
-      // home: AddNewsScreen(),
-      // initialRoute: firebaseuser == null ? DeciderScreen.routeName : null,
+      home: BottomTabsScreen(),
+      initialRoute: firebaseuser == null || userData == null
+          ? DeciderScreen.routeName
+          : null,
       routes: {
         DeciderScreen.routeName: (ctx) => DeciderScreen(),
         LoginScreen.routeName: (ctx) => LoginScreen(),

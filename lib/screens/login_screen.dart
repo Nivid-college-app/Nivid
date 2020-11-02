@@ -1,11 +1,11 @@
 import 'dart:ui';
-import 'package:Nivid/helpers/custom_scale_route.dart';
+import 'package:Nivid/services/authentication.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 import 'package:Nivid/global/default_buttons.dart';
 import 'package:Nivid/global/default_decorations.dart';
-import 'package:Nivid/screens/bottom_tabs_screen.dart';
+import 'package:regexed_validator/regexed_validator.dart' as regex;
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '\LoginScreen';
@@ -20,8 +20,8 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _glowPassword = false;
   bool _glowEmail = false;
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final _emailCtrl = TextEditingController();
+  final _passwordCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +89,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               _glowPassword = false;
                             });
                           },
-                          controller: _emailController,
+                          controller: _emailCtrl,
+                          validator: (value) {
+                            if (regex.validator.email(value))
+                              return null;
+                            else
+                              return 'Invalid email!';
+                          },
                           cursorColor: Colors.black,
                           style:
                               TextStyle(color: Colors.black, letterSpacing: 1),
@@ -112,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               _glowPassword = true;
                             });
                           },
-                          controller: _passwordController,
+                          controller: _passwordCtrl,
                           cursorColor: Colors.black,
                           style:
                               TextStyle(color: Colors.black, letterSpacing: 1),
@@ -133,10 +139,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: FittedBox(
                             fit: BoxFit.scaleDown,
                             child: DefaultButtons.floatButton(context,
-                                onTap: () => Navigator.of(context)
-                                    .pushAndRemoveUntil(
-                                        CustomScaleRoute(BottomTabsScreen()),
-                                        (route) => false),
+                                onTap: () {
+                              if (_formKey.currentState.validate()) {
+                                _formKey.currentState.save();
+                                Authentication.signin(context,
+                                    email: _emailCtrl.text,
+                                    password: _passwordCtrl.text);
+                              }
+                            },
                                 color: Theme.of(context).primaryColor,
                                 textColor: Colors.white,
                                 title: 'Sign in',

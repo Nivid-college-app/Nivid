@@ -1,4 +1,6 @@
+import 'package:Nivid/global/variables.dart';
 import 'package:Nivid/models/home_post.dart';
+import 'package:Nivid/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
@@ -18,6 +20,7 @@ class _PostTrailingState extends State<PostTrailing> {
       _liked = !_liked;
       _disLiked = false;
     });
+    Database.likePost(widget.post);
   }
 
   void _onDislike() {
@@ -25,6 +28,16 @@ class _PostTrailingState extends State<PostTrailing> {
       _liked = false;
       _disLiked = !_disLiked;
     });
+    Database.disLikePost(widget.post);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.post.userIdsLiked.contains(firebaseuser.uid))
+      _liked = true;
+    else if (widget.post.userIdsDisliked.contains(firebaseuser.uid))
+      _disLiked = true;
   }
 
   @override
@@ -42,7 +55,7 @@ class _PostTrailingState extends State<PostTrailing> {
                   : FlutterIcons.thumbs_o_up_faw,
             ),
             onPressed: _onLike),
-        Text('${widget.post.userIdsLiked.length}'),
+        if (userData.isAdmin) Text('${widget.post.userIdsLiked.length}'),
         IconButton(
             padding: EdgeInsets.only(left: 8),
             splashColor: Colors.transparent,
@@ -53,7 +66,7 @@ class _PostTrailingState extends State<PostTrailing> {
                   : FlutterIcons.thumbs_o_down_faw,
             ),
             onPressed: _onDislike),
-        Text('${widget.post.userIdsDisliked.length}'),
+        if (userData.isAdmin) Text('${widget.post.userIdsDisliked.length}'),
       ],
     );
   }

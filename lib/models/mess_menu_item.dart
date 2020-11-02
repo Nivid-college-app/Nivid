@@ -11,7 +11,7 @@ class MessMenuItem {
       {@required this.id,
       @required this.foodName,
       @required this.imageLink,
-      @required this.rating});
+      this.rating = 0});
 
   MessMenuItem.fromMap(Map<String, dynamic> doc) {
     this.id = doc['id'];

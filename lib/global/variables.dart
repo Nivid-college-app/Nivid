@@ -1,8 +1,10 @@
+import 'package:Nivid/providers/app_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 User firebaseuser;
 FirebaseApp firebaseApp;
+AppUser userData;
 
 List<String> dummyImageLinks = [
   'https://cdn.mos.cms.futurecdn.net/gvQ9NhQP8wbbM32jXy4V3j.jpg',

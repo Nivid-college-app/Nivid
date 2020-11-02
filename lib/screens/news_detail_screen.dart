@@ -1,3 +1,4 @@
+import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:Nivid/models/news_feed.dart';
@@ -26,14 +27,14 @@ class NewsDetailScreen extends StatelessWidget {
                 borderRadius:
                     BorderRadius.vertical(bottom: Radius.circular(30)),
                 child: feed.isVideo
-                    ? NewsVideo(size: size, url: feed.videoLink)
+                    ? NewsVideo(size: size, url: feed.downloadLink)
                     : FadeInImage(
                         height: size.height * 0.5,
                         width: size.width,
                         fit: BoxFit.fill,
                         placeholder:
                             AssetImage('assets/images/placeholder.webp'),
-                        image: NetworkImage(feed.imageLink)),
+                        image: NetworkImage(feed.downloadLink)),
               ),
               Positioned(
                   left: 10,
@@ -86,10 +87,9 @@ class NewsDetailScreen extends StatelessWidget {
           SizedBox(height: 10),
           Container(
               margin: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
-              child: Text(
-                feed.description,
-                style: TextStyle(fontSize: 16, fontFamily: 'Quicksand'),
-              )),
+              child: Linkify(
+                  text: feed.description,
+                  style: TextStyle(fontSize: 16, fontFamily: 'Quicksand'))),
         ],
       ),
     );

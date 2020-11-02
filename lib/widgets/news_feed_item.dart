@@ -41,7 +41,7 @@ class NewsFeedItem extends StatelessWidget {
                       width: size.width * 0.22,
                       fit: BoxFit.fill,
                       placeholder: AssetImage('assets/images/app_icon.png'),
-                      image: NetworkImage(feed.imageLink)),
+                      image: NetworkImage(feed.downloadLink)),
             ),
             Expanded(
                 child: Padding(

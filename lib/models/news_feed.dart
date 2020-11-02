@@ -38,12 +38,10 @@ class NewsFeed {
   String uid;
   String userImageLink;
   String userName;
-  String imageLink;
-  String videoLink;
+  String downloadLink;
   String headLine;
   String description;
   bool isVideo;
-  List<String> additionalLinks;
   NewsType type;
   DateTime timePosted;
 
@@ -52,12 +50,10 @@ class NewsFeed {
     @required this.uid,
     @required this.userImageLink,
     @required this.userName,
-    @required this.imageLink,
-    @required this.videoLink,
+    @required this.downloadLink,
     this.isVideo = false,
     @required this.headLine,
     @required this.description,
-    this.additionalLinks,
     @required this.type,
     @required this.timePosted,
   });
@@ -67,12 +63,10 @@ class NewsFeed {
     this.uid = doc['uid'];
     this.userImageLink = doc['uil'];
     this.userName = doc['usrnm'];
-    this.imageLink = doc['imglnk'];
-    this.videoLink = doc['vidLnk'];
+    this.downloadLink = doc['dllnk'];
     this.isVideo = doc['isVid'];
     this.headLine = doc['hdln'];
     this.description = doc['desc'];
-    this.additionalLinks = doc['addLnks'];
     this.type = toEnum(doc['type']);
     this.timePosted = doc['tp']?.toDate();
   }
@@ -82,12 +76,10 @@ class NewsFeed {
         'uid': this.uid,
         'uil': this.userImageLink,
         'usrnm': this.userName,
-        'imglnk': this.imageLink,
-        'vidLnk': this.videoLink,
+        'dllnk': this.downloadLink,
         'isVid': this.isVideo,
         'hdln': this.headLine,
         'desc': this.description,
-        'addLnks': this.additionalLinks,
         'type': toValueString(this.type),
         'tp': this.timePosted,
       };
@@ -99,12 +91,11 @@ List<NewsFeed> newsfeeds = [
       uid: '1',
       userImageLink: null,
       userName: 'IIIT Kottayam',
-      imageLink: dummyImageLinks.elementAt(8),
-      videoLink: null,
+      downloadLink: dummyImageLinks.elementAt(8),
       headLine:
           'Google Trusted Contacts Officially Pulled From App Stores, Support to Stop After December 1',
       description:
-          'Google has officially pulled the plug on its Trusted Contacts app. First introduced in 2016, the app offered users a way to share their device activity status and location with selected contacts. It has now disappeared from both Google Play store and the Apple\'s App Store. The tech giant will also stop support for the app starting December 1 this year. The move follows a series of measures that Google has taken recently to optimise its products and services. Trusted Contacts follows in the footsteps of Google\'s two other location sharing apps — Google Latitude and Google+ Location Sharing — that were scrapped earlier.\nTrusted Contacts was first inducted exclusively to Play Store for Android users. A year and some upgrades later, it was made available for iOS users via the App Store. By then, it was integrated with Google Maps and offered useful features like allowing a trusted contact to be added via email address. But it slowly lost its sheen.\nFor those who have the Trusted Contacts app installed still, Google will end support to it after December 1. The website has put up a notice that announces the date. Google is prompting the users to use location sharing feature, that now also includes live location — a functionality of trusted contacts — on Google Maps instead. Users who wish to download a list of their trusted contacts also have till December 1 to do it from the website.',
+          'Google has officially pulled the plug on its Trusted Contacts app. First introduced in 2016, the app offered users a way to share their device activity status and location with selected contacts. It has now disappeared from both Google Play store and the Apple\'s App Store. The tech giant will also stop support for the app starting December 1 this year. The move follows a series of measures that Google has taken recently to optimise its products and services. Trusted Contacts follows in the footsteps of Google\'s two other location sharing apps — Google Latitude and Google+ Location Sharing — that were scrapped earlier.\nTrusted Contacts was first inducted exclusively to Play Store for Android users. A year and some upgrades later, it was made available for iOS users via the App Store. By then, it was integrated with Google Maps and offered useful features like allowing a trusted contact to be added via email address. But it slowly lost its sheen.\nFor those who have the Trusted Contacts app installed still, Google will end support to it after December 1. The website has put up a notice that announces the date. Google is prompting the users to use location sharing feature, that now also includes live location — a functionality of trusted contacts — on Google Maps instead. Users who wish to download a list of their trusted contacts also have till December 1 to do it from the website.\nhttps://gadgets.ndtv.com/apps/news/google-contacts-app-removed-play-store-apple-support-stop-last-date-december-1-maps-2311682',
       type: NewsType.General,
       timePosted: DateTime.now()),
   NewsFeed(
@@ -112,8 +103,7 @@ List<NewsFeed> newsfeeds = [
       uid: '1',
       userImageLink: null,
       userName: 'IIIT Kottayam',
-      imageLink: dummyImageLinks.elementAt(9),
-      videoLink: null,
+      downloadLink: dummyImageLinks.elementAt(9),
       headLine:
           'Samsung Galaxy S21 Launch May Take Place in Early January, Production Said to Begin Late This Year',
       description:
@@ -125,8 +115,7 @@ List<NewsFeed> newsfeeds = [
       uid: '1',
       userImageLink: null,
       userName: 'IIIT Kottayam',
-      imageLink: null,
-      videoLink: dummyVideoLinks.elementAt(3),
+      downloadLink: dummyVideoLinks.elementAt(3),
       isVideo: true,
       headLine:
           'Exercise and yoga keeps you fit and healthy, Here are some tips.',
@@ -139,8 +128,7 @@ List<NewsFeed> newsfeeds = [
       uid: '1',
       userImageLink: null,
       userName: 'IIIT Kottayam',
-      imageLink: null,
-      videoLink: dummyVideoLinks.elementAt(2),
+      downloadLink: dummyVideoLinks.elementAt(2),
       isVideo: true,
       headLine:
           'Photography contest at IIIT Kottayam, Here is how to participate.',
@@ -153,8 +141,7 @@ List<NewsFeed> newsfeeds = [
       uid: '1',
       userImageLink: null,
       userName: 'IIIT Kottayam',
-      imageLink: dummyImageLinks.elementAt(10),
-      videoLink: null,
+      downloadLink: dummyImageLinks.elementAt(10),
       headLine:
           'Paytm credit card coming soon, around 2 million cards to be issued in 18 months',
       description:
@@ -166,8 +153,7 @@ List<NewsFeed> newsfeeds = [
       uid: '1',
       userImageLink: null,
       userName: 'IIIT Kottayam',
-      imageLink: dummyImageLinks.elementAt(11),
-      videoLink: null,
+      downloadLink: dummyImageLinks.elementAt(11),
       headLine:
           'PUBG ban in India: Why gamers can still download, play the game',
       description:
@@ -179,8 +165,7 @@ List<NewsFeed> newsfeeds = [
       uid: '1',
       userImageLink: null,
       userName: 'IIIT Kottayam',
-      imageLink: dummyImageLinks.elementAt(12),
-      videoLink: null,
+      downloadLink: dummyImageLinks.elementAt(12),
       headLine:
           'Amazon vs Flipkart sales: Up to Rs 28,000 discount on top smartphones',
       description:
@@ -192,8 +177,7 @@ List<NewsFeed> newsfeeds = [
       uid: '1',
       userImageLink: null,
       userName: 'IIIT Kottayam',
-      imageLink: dummyImageLinks.elementAt(13),
-      videoLink: null,
+      downloadLink: dummyImageLinks.elementAt(13),
       headLine:
           'Indian startups up the ante against Google; knock on CCI\'s door',
       description:
@@ -205,8 +189,7 @@ List<NewsFeed> newsfeeds = [
       uid: '1',
       userImageLink: null,
       userName: 'IIIT Kottayam',
-      imageLink: dummyImageLinks.elementAt(14),
-      videoLink: null,
+      downloadLink: dummyImageLinks.elementAt(14),
       headLine:
           'Sony PlayStation 5 India prices announced, start from Rs 39,990',
       description:
@@ -218,8 +201,7 @@ List<NewsFeed> newsfeeds = [
       uid: '1',
       userImageLink: null,
       userName: 'IIIT Kottayam',
-      imageLink: dummyImageLinks.last,
-      videoLink: null,
+      downloadLink: dummyImageLinks.last,
       headLine:
           'Apple announces free virtual workshops for Indian users on photography and music',
       description:
