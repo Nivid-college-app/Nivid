@@ -47,7 +47,7 @@ class AcademicsScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CircleAvatar(
-                        backgroundColor: Theme.of(context).primaryColor,
+                        backgroundColor: Colors.green,
                         radius: 27,
                         child: FutureBuilder(
                           future:
@@ -75,7 +75,7 @@ class AcademicsScreen extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            fontFamily: 'Quicksand')),
+                            fontFamily: 'Raleway')),
                   ],
                 )),
             Column(

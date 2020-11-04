@@ -1,3 +1,4 @@
+import 'package:Nivid/screens/about_us_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -71,6 +72,7 @@ class MyApp extends StatelessWidget {
         AcademicsScreen.routeName: (ctx) => AcademicsScreen(),
         TimeTableScreen.routeName: (ctx) => TimeTableScreen(),
         UpdateMessMenuScreen.routeName: (ctx) => UpdateMessMenuScreen(),
+        AboutUsScreen.routeName: (ctx) => AboutUsScreen(),
       },
     );
   }
