@@ -7,8 +7,12 @@ import 'package:flutter/material.dart';
 class SelectImageVideoScreen extends StatefulWidget {
   static const routeName = '.\SelectImageVideoScreen';
   final bool isVideo;
+  final bool selectone;
   final List galleryFiles;
-  SelectImageVideoScreen({this.isVideo = false, @required this.galleryFiles});
+  SelectImageVideoScreen(
+      {this.isVideo = false,
+      @required this.galleryFiles,
+      this.selectone = false});
 
   @override
   _SelectImageVideoScreenState createState() => _SelectImageVideoScreenState();
@@ -87,8 +91,12 @@ class _SelectImageVideoScreenState extends State<SelectImageVideoScreen> {
                           final file = File(_selected.files[index]);
                           if (file.lengthSync() / 1000000 > 3)
                             Fluttertoast.showToast(msg: 'Size limit exceeded');
-                          else
-                            Navigator.pop(context, [file]);
+                          else {
+                            if (widget.selectone)
+                              Navigator.pop(context, file);
+                            else
+                              Navigator.pop(context, [file]);
+                          }
                         },
                         child: FutureBuilder(
                             future: VideoThumbnail.thumbnailData(
@@ -106,13 +114,16 @@ class _SelectImageVideoScreenState extends State<SelectImageVideoScreen> {
                     )
                   : GestureDetector(
                       onTap: () {
-                        setState(() {
-                          _isSelected[index] = !_isSelected[index];
-                          if (_isSelected[index])
-                            _count += 1;
-                          else
-                            _count -= 1;
-                        });
+                        if (widget.selectone)
+                          Navigator.pop(context, File(_selected.files[index]));
+                        else
+                          setState(() {
+                            _isSelected[index] = !_isSelected[index];
+                            if (_isSelected[index])
+                              _count += 1;
+                            else
+                              _count -= 1;
+                          });
                       },
                       child: Container(
                           margin: EdgeInsets.all(2),

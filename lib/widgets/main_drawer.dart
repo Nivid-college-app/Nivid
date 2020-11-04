@@ -1,4 +1,5 @@
 import 'package:Nivid/global/variables.dart';
+import 'package:Nivid/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
@@ -43,16 +44,35 @@ class MainDrawer extends StatelessWidget {
           ListTile(
             contentPadding: EdgeInsets.only(left: size.width * 0.025, top: top),
             leading: CircleAvatar(
-                radius: size.width * 0.075,
-                backgroundImage: AssetImage('assets/images/iiitk.jpg')),
-            title: Text('IIIT Kottayam',
+              backgroundColor: Theme.of(context).primaryColor,
+              radius: 27,
+              child: FutureBuilder(
+                future: Database.getCollegePicture(userData.collegeId),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting)
+                    return CircleAvatar(
+                        radius: 25,
+                        backgroundColor: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CircularProgressIndicator(),
+                        ));
+                  return CircleAvatar(
+                      radius: 25,
+                      backgroundImage: snapshot.data == null
+                          ? AssetImage('assets/images/iiitk.jpg')
+                          : NetworkImage(snapshot.data));
+                },
+              ),
+            ),
+            title: Text(userData.college,
                 style: TextStyle(
                     fontSize: 18,
                     color: Theme.of(ctx).primaryColor,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 0.5)),
-            subtitle:
-                Text('Hello there, welcome!', style: TextStyle(fontSize: 16)),
+            subtitle: Text('Hello ${userData.name}, welcome!',
+                style: TextStyle(fontSize: 16)),
           ),
           Divider(thickness: 1, color: Colors.blueGrey),
           getDrawerButton(
@@ -60,6 +80,12 @@ class MainDrawer extends StatelessWidget {
               icon: FlutterIcons.school_mdi,
               onPressed: () => Navigator.of(context).push(
                   CustomSlideRoute(AcademicsScreen(), begin: Offset(1, 0)))),
+          if (userData.isAdmin) Divider(thickness: 1, height: 5),
+          if (userData.isAdmin)
+            getDrawerButton(
+                title: 'Update mess menu',
+                icon: Icons.restaurant_menu,
+                onPressed: () {}),
           if (userData.isAdmin) Divider(thickness: 1, height: 5),
           if (userData.isAdmin)
             getDrawerButton(

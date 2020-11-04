@@ -33,6 +33,9 @@ class _ImagePostState extends State<ImagePost> {
                     image: NetworkImage(widget.post.imagelinks[index]))),
           ),
           options: CarouselOptions(
+              scrollPhysics: widget.post.imagelinks.length > 1
+                  ? null
+                  : NeverScrollableScrollPhysics(),
               initialPage: 0,
               viewportFraction: 1.0,
               onPageChanged: (index, reason) {
@@ -41,20 +44,21 @@ class _ImagePostState extends State<ImagePost> {
                 });
               }),
         ),
-        Positioned(
-            top: 4,
-            right: 4,
-            child: Card(
-              color: Colors.black87,
-              margin: EdgeInsets.all(10.0),
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Text('${ind + 1} / ${widget.post.imagelinks.length}',
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center),
-              ),
-            ))
+        if (widget.post.imagelinks.length > 1)
+          Positioned(
+              top: 4,
+              right: 4,
+              child: Card(
+                color: Colors.black87,
+                margin: EdgeInsets.all(10.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Text('${ind + 1} / ${widget.post.imagelinks.length}',
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center),
+                ),
+              ))
       ],
     );
   }

@@ -5,6 +5,7 @@ class AppUser with ChangeNotifier {
   String name;
   String email;
   String college;
+  String collegeId;
   String password;
   bool isAdmin;
   DateTime startDate;
@@ -15,8 +16,8 @@ class AppUser with ChangeNotifier {
       @required this.name,
       @required this.email,
       this.password,
-      // @required
-      this.college = 'IIIT Kottayam',
+      @required this.college,
+      @required this.collegeId,
       this.isAdmin = false,
       @required this.startDate,
       this.profileImageLink});
@@ -27,6 +28,7 @@ class AppUser with ChangeNotifier {
     this.email = doc['email'];
     this.password = doc['pwd'];
     this.college = doc['college'];
+    this.collegeId = doc['clgId'];
     this.isAdmin = doc['isAdm'];
     this.startDate = doc['sd']?.toDate();
     this.profileImageLink = doc['pil'];
@@ -38,6 +40,7 @@ class AppUser with ChangeNotifier {
         'email': this.email,
         'pwd': this.password,
         'college': this.college,
+        'clgId': this.collegeId,
         'isAdm': this.isAdmin,
         'sd': this.startDate,
         'pil': this.profileImageLink,

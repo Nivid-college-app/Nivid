@@ -127,16 +127,24 @@ class _PlayOrPauseControlState extends State<PlayOrPauseControl> {
       duration: Duration(milliseconds: 350),
       child: GestureDetector(
         onTap: _playOrPauseVideo,
-        child: AnimatedContainer(
-          duration: Duration(milliseconds: 850),
-          height: _isPressed ? 65 : 45,
-          width: _isPressed ? 65 : 45,
+        child: Container(
+          color: Colors.transparent,
+          width: MediaQuery.of(context).size.width,
+          height: (MediaQuery.of(context).size.width - 16) /
+                  widget.videoController.value.aspectRatio -
+              80,
           alignment: Alignment.center,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(50), color: Colors.black45),
-          child: FittedBox(
-            child: Icon(_playing ? Icons.play_arrow : Icons.pause,
-                color: Colors.white),
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 850),
+            height: _isPressed ? 65 : 45,
+            width: _isPressed ? 65 : 45,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50), color: Colors.black45),
+            child: FittedBox(
+              child: Icon(_playing ? Icons.play_arrow : Icons.pause,
+                  color: Colors.white),
+            ),
           ),
         ),
       ),
@@ -163,42 +171,15 @@ class MuteOrUnmuteControl extends StatefulWidget {
 }
 
 class _MuteOrUnmuteControlState extends State<MuteOrUnmuteControl> {
-  Timer _timer;
-  double _opacity = 1;
-
   void _muteOrUnmuteVolume() {
     if (widget.videoController.value.isPlaying) {
       setState(() {
         muteVolume = !muteVolume;
-        _opacity = 1;
-      });
-      _timer = Timer(Duration(seconds: 1, milliseconds: 500), () {
-        setState(() {
-          _opacity = 0;
-        });
-        _timer.cancel();
       });
       muteVolume
           ? widget.videoController.setVolume(0)
           : widget.videoController.setVolume(1);
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _timer = Timer(Duration(seconds: 1, milliseconds: 500), () {
-      setState(() {
-        _opacity = 0;
-      });
-      _timer.cancel();
-    });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _timer.cancel();
   }
 
   @override
@@ -208,20 +189,17 @@ class _MuteOrUnmuteControlState extends State<MuteOrUnmuteControl> {
         left: widget.left,
         right: widget.right,
         top: widget.top,
-        child: AnimatedOpacity(
-            opacity: _opacity,
-            duration: Duration(milliseconds: 350),
-            child: CircleAvatar(
-                radius: 14,
-                backgroundColor: Colors.grey[800],
-                child: IconButton(
-                    iconSize: 12,
-                    splashColor: Colors.transparent,
-                    alignment: Alignment.center,
-                    color: Colors.white,
-                    icon: Icon(muteVolume
-                        ? FlutterIcons.volume_mute_faw5s
-                        : FlutterIcons.volume_up_faw5s),
-                    onPressed: _muteOrUnmuteVolume))));
+        child: CircleAvatar(
+            radius: 14,
+            backgroundColor: Colors.black54,
+            child: IconButton(
+                iconSize: 12,
+                splashColor: Colors.transparent,
+                alignment: Alignment.center,
+                color: Colors.white,
+                icon: Icon(muteVolume
+                    ? FlutterIcons.volume_mute_faw5s
+                    : FlutterIcons.volume_up_faw5s),
+                onPressed: _muteOrUnmuteVolume)));
   }
 }

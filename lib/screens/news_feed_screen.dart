@@ -59,22 +59,24 @@ class NewsFeedScreen extends StatelessWidget {
             preferredSize: Size(size.width, size.height * 0.12),
           ),
           body: TabBarView(children: [
-            getNewsTabItem(context),
+            getNewsTabItem(context, isCollege: true),
             getNewsTabItem(context),
           ])),
     );
   }
 
-  Widget getNewsTabItem(BuildContext context) {
-    return ListView.builder(
-        itemCount: newsfeeds.length + 1,
-        itemBuilder: (context, index) {
-          if (index == newsfeeds.length)
+  Widget getNewsTabItem(BuildContext context, {bool isCollege = false}) {
+    return FutureBuilder(
+      future: getAllNewsfeeds(isCollege: isCollege),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          if (snapshot.data.first == null) {
+            final str = isCollege ? 'from your college' : '';
             return Padding(
               padding: const EdgeInsets.only(top: 30, bottom: 90),
               child: Align(
                 alignment: Alignment.topCenter,
-                child: Text('No more feeds!\nThank you',
+                child: Text('No feeds $str!\nThank you',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Theme.of(context).primaryColor,
@@ -82,7 +84,30 @@ class NewsFeedScreen extends StatelessWidget {
                         fontSize: 18)),
               ),
             );
-          return NewsFeedItem(feed: newsfeeds[index]);
-        });
+          } else
+            return ListView.builder(
+                itemCount: snapshot.data.length + 1,
+                itemBuilder: (context, index) {
+                  if (index == snapshot.data.length)
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 30, bottom: 90),
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: Text('No more feeds!\nThank you',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18)),
+                      ),
+                    );
+                  return NewsFeedItem(feed: snapshot.data[index]);
+                });
+        } else if (snapshot.connectionState == ConnectionState.waiting)
+          return Center(child: CircularProgressIndicator());
+        else
+          return Center(child: Text('something went wrong!'));
+      },
+    );
   }
 }

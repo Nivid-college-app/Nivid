@@ -50,28 +50,36 @@ class _AddPostScreenState extends State<AddPostScreen> {
           FlatButton.icon(
               textColor: Colors.white,
               onPressed: () async {
-                HomePost post = HomePost(
-                    id: null,
-                    uid: userData.id,
-                    userName: userData.name,
-                    userImageLink: userData.profileImageLink,
-                    videoLink:
-                        _hasVideoFiles ? _selectedFiles.first.path : null,
-                    imagelinks: _hasImageFiles
-                        ? _selectedFiles.map((e) => e.path).toList()
-                        : [],
-                    userIdsLiked: [],
-                    isVideo: _hasVideoFiles,
-                    isText: !_hasImageFiles && !_hasVideoFiles,
-                    userIdsDisliked: [],
-                    text: _textCtrl.text,
-                    description: _descriptionCtrl.text.isEmpty
-                        ? null
-                        : _descriptionCtrl.text,
-                    timePosted: null);
-                Database.uploadPost(context, post);
-                _textCtrl.clear();
-                _descriptionCtrl.clear();
+                if (_textCtrl.text.isEmpty &&
+                    !_hasImageFiles &&
+                    !_hasVideoFiles) {
+                  Fluttertoast.showToast(
+                      msg:
+                          'Text filed must not be empty, or\n Select either video or photos');
+                } else {
+                  HomePost post = HomePost(
+                      id: null,
+                      uid: userData.id,
+                      userName: userData.name,
+                      userImageLink: userData.profileImageLink,
+                      videoLink:
+                          _hasVideoFiles ? _selectedFiles.first.path : null,
+                      imagelinks: _hasImageFiles
+                          ? _selectedFiles.map((e) => e.path).toList()
+                          : [],
+                      userIdsLiked: [],
+                      isVideo: _hasVideoFiles,
+                      isText: !_hasImageFiles && !_hasVideoFiles,
+                      userIdsDisliked: [],
+                      text: _textCtrl.text,
+                      description: _descriptionCtrl.text.isEmpty
+                          ? null
+                          : _descriptionCtrl.text,
+                      timePosted: null);
+                  Database.uploadPost(context, post);
+                  _textCtrl.clear();
+                  _descriptionCtrl.clear();
+                }
               },
               icon: Icon(Icons.send_outlined),
               label: Text('send'))
@@ -88,18 +96,33 @@ class _AddPostScreenState extends State<AddPostScreen> {
                     SizedBox(height: 20),
                     Row(children: [
                       CircleAvatar(
-                          backgroundImage:
-                              AssetImage('assets/images/iiitk.jpg'),
-                          radius: 25,
-                          backgroundColor: Colors.white),
+                        backgroundColor: Theme.of(context).primaryColor,
+                        radius: 27,
+                        child: CircleAvatar(
+                            backgroundImage: userData.profileImageLink != null
+                                ? NetworkImage(userData.profileImageLink)
+                                : AssetImage('assets/images/iiitk.jpg'),
+                            radius: 25,
+                            backgroundColor: Colors.white),
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16, vertical: 8),
-                        child: Text('IIIT Kottayam',
+                        child: Text(userData.college,
                             style: TextStyle(fontSize: 18)),
                       )
                     ]),
-                    SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: TextFormField(
+                          controller: _descriptionCtrl,
+                          minLines: 1,
+                          maxLines: 5,
+                          decoration: InputDecoration(
+                              hintText: 'Say something about this text...',
+                              border: InputBorder.none)),
+                    ),
+                    SizedBox(height: 10),
                     TextFormField(
                         controller: _textCtrl,
                         maxLines: 10,
@@ -118,8 +141,10 @@ class _AddPostScreenState extends State<AddPostScreen> {
                             Fluttertoast.showToast(msg: 'Please wait!');
                             await getImagesorVideosPath();
                             Navigator.of(context)
-                                .push(CustomSlideRoute(SelectImageVideoScreen(
-                                    galleryFiles: _files)))
+                                .push(CustomSlideRoute(
+                                    SelectImageVideoScreen(
+                                        galleryFiles: _files),
+                                    begin: Offset(1, 0)))
                                 .then((value) {
                               _selectedFiles = value;
                               if (_selectedFiles != null &&
@@ -144,8 +169,10 @@ class _AddPostScreenState extends State<AddPostScreen> {
                             Fluttertoast.showToast(msg: 'Please wait!');
                             await getImagesorVideosPath(isVideo: true);
                             Navigator.of(context)
-                                .push(CustomSlideRoute(SelectImageVideoScreen(
-                                    galleryFiles: _files, isVideo: true)))
+                                .push(CustomSlideRoute(
+                                    SelectImageVideoScreen(
+                                        galleryFiles: _files, isVideo: true),
+                                    begin: Offset(1, 0)))
                                 .then((value) {
                               _selectedFiles = value;
                               if (_selectedFiles != null &&
@@ -216,13 +243,19 @@ class VideoPreview extends StatelessWidget {
           padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
           child: Row(children: [
             CircleAvatar(
-                backgroundImage: AssetImage('assets/images/iiitk.jpg'),
-                radius: 25,
-                backgroundColor: Colors.white),
+              backgroundColor: Theme.of(context).primaryColor,
+              radius: 27,
+              child: CircleAvatar(
+                  backgroundImage: userData.profileImageLink != null
+                      ? NetworkImage(userData.profileImageLink)
+                      : AssetImage('assets/images/iiitk.jpg'),
+                  radius: 25,
+                  backgroundColor: Colors.white),
+            ),
             Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: Text('IIIT Kottayam', style: TextStyle(fontSize: 18)))
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Text(userData.college, style: TextStyle(fontSize: 18)),
+            )
           ]),
         ),
         Padding(
@@ -266,13 +299,19 @@ class _ImagePreviewState extends State<ImagePreview> {
           padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
           child: Row(children: [
             CircleAvatar(
-                backgroundImage: AssetImage('assets/images/iiitk.jpg'),
-                radius: 25,
-                backgroundColor: Colors.white),
+              backgroundColor: Theme.of(context).primaryColor,
+              radius: 27,
+              child: CircleAvatar(
+                  backgroundImage: userData.profileImageLink != null
+                      ? NetworkImage(userData.profileImageLink)
+                      : AssetImage('assets/images/iiitk.jpg'),
+                  radius: 25,
+                  backgroundColor: Colors.white),
+            ),
             Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: Text('IIIT Kottayam', style: TextStyle(fontSize: 18)))
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Text(userData.college, style: TextStyle(fontSize: 18)),
+            )
           ]),
         ),
         Padding(

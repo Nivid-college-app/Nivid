@@ -40,14 +40,16 @@ class _MessScreenState extends State<MessScreen> {
       itemBuilder: (context, index) {
         if (index == 0)
           return Container(
-            margin: EdgeInsets.only(left: 20,bottom: 10),
+            alignment: Alignment.center,
+            margin: EdgeInsets.only(bottom: 10),
             child: Text(
                 DefaultTabController.of(context).index == 0
                     ? '7:00 AM - 8:30 AM'
                     : DefaultTabController.of(context).index == 1
                         ? '12:00 PM - 2:30 PM'
                         : '7:00 PM - 9:00 PM',
-                style: TextStyle(color: Theme.of(context).primaryColor)),
+                style: TextStyle(
+                    color: Colors.black, fontWeight: FontWeight.w600)),
           );
         if (index == messMenuItems.length + 1)
           return Padding(
@@ -196,12 +198,15 @@ class _MessScreenState extends State<MessScreen> {
                     child: TabBar(
                       tabs: [
                         Container(
+                            alignment: Alignment.center,
                             child: FittedBox(child: Text('Breakfast')),
                             padding: EdgeInsets.all(4)),
                         Container(
+                            alignment: Alignment.center,
                             child: FittedBox(child: Text('Lunch')),
                             padding: EdgeInsets.all(4)),
                         Container(
+                            alignment: Alignment.center,
                             child: FittedBox(child: Text('Dinner')),
                             padding: EdgeInsets.all(4)),
                       ],

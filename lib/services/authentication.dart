@@ -58,6 +58,8 @@ class Authentication {
             name:
                 _googleAccount.displayName ?? firebaseuser.email.split('@')[0],
             email: firebaseuser.email,
+            college: 'IIIT Kottayam',
+            collegeId: 'Az1OwHMTg0awc3vYRX7Vd0vVMxl1',
             startDate: null,
             profileImageLink: _googleAccount.photoUrl);
         await FirebaseFirestore.instance
