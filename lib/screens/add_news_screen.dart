@@ -77,7 +77,6 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
                 NewsFeed feed = NewsFeed(
                     id: null,
                     uid: firebaseuser.uid,
-                    userImageLink: userData.profileImageLink,
                     userName: userData.name,
                     downloadLink: _pickedFile.path,
                     headLine: _headlineCtrl.text,
@@ -105,7 +104,7 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
                 child: CircleAvatar(
                     backgroundImage: userData.profileImageLink != null
                         ? NetworkImage(userData.profileImageLink)
-                        : AssetImage('assets/images/iiitk.jpg'),
+                        : AssetImage('assets/images/college.jpg'),
                     radius: 25,
                     backgroundColor: Colors.white),
               ),
@@ -219,7 +218,10 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
                   _getTitleText('Category :', context),
                   _getRadioButton(NewsType.General),
                   _getRadioButton(NewsType.Technical),
-                  _getRadioButton(NewsType.Social)
+                  _getRadioButton(NewsType.Social),
+                  _getRadioButton(NewsType.Science),
+                  _getRadioButton(NewsType.Sports),
+                  _getRadioButton(NewsType.Entertainment)
                 ], crossAxisAlignment: CrossAxisAlignment.start),
               )
             ])

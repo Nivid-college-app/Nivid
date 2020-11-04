@@ -1,11 +1,14 @@
-import 'package:Nivid/global/variables.dart';
 import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:Nivid/global/variables.dart';
 
 enum NewsType {
   General,
   Technical,
   Social,
+  Science,
+  Sports,
+  Entertainment,
 }
 
 String toValueString(NewsType type) {
@@ -16,6 +19,12 @@ String toValueString(NewsType type) {
       return 'TECHNICAL';
     case NewsType.Social:
       return 'SOCIAL';
+    case NewsType.Science:
+      return 'SCIENCE';
+    case NewsType.Sports:
+      return 'SPORTS';
+    case NewsType.Entertainment:
+      return 'ENTERTAINMENT';
     default:
       return null;
   }
@@ -29,6 +38,12 @@ NewsType toEnum(String type) {
       return NewsType.Technical;
     case 'SOCIAL':
       return NewsType.Social;
+    case 'SCIENCE':
+      return NewsType.Science;
+    case 'SPORTS':
+      return NewsType.Social;
+    case 'ENTERTAINMENT':
+      return NewsType.Entertainment;
     default:
       return null;
   }
@@ -37,7 +52,6 @@ NewsType toEnum(String type) {
 class NewsFeed {
   String id;
   String uid;
-  String userImageLink;
   String userName;
   String downloadLink;
   String headLine;
@@ -49,7 +63,6 @@ class NewsFeed {
   NewsFeed({
     @required this.id,
     @required this.uid,
-    @required this.userImageLink,
     @required this.userName,
     @required this.downloadLink,
     this.isVideo = false,
@@ -62,7 +75,6 @@ class NewsFeed {
   NewsFeed.fromMap(Map<String, dynamic> doc) {
     this.id = doc['id'];
     this.uid = doc['uid'];
-    this.userImageLink = doc['uil'];
     this.userName = doc['usrnm'];
     this.downloadLink = doc['dllnk'];
     this.isVideo = doc['isVid'];
@@ -75,7 +87,6 @@ class NewsFeed {
   Map<String, dynamic> toJson() => {
         'id': this.id,
         'uid': this.uid,
-        'uil': this.userImageLink,
         'usrnm': this.userName,
         'dllnk': this.downloadLink,
         'isVid': this.isVideo,
@@ -93,7 +104,7 @@ Future<List<NewsFeed>> getAllNewsfeeds({bool isCollege = false}) async {
       .get();
   if (isCollege) {
     return snap.docs.map((e) {
-      if (e.data()['id'] == userData.collegeId) {
+      if (e.data()['uid'] == userData.collegeId) {
         return NewsFeed.fromMap(e.data());
       }
     }).toList();

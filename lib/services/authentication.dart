@@ -1,4 +1,3 @@
-import 'package:Nivid/services/database.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -7,6 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:Nivid/global/variables.dart';
+import 'package:Nivid/services/database.dart';
 import 'package:Nivid/providers/app_user.dart';
 import 'package:Nivid/screens/decider_screen.dart';
 import 'package:Nivid/global/default_dialog_box.dart';
@@ -72,32 +72,50 @@ class Authentication {
         Navigator.of(context).pushAndRemoveUntil(
             CustomSlideRoute(BottomTabsScreen(), begin: Offset(1.0, 0)),
             (route) => false);
-        Fluttertoast.showToast(
-            msg: 'Successfully logged in!',
-            backgroundColor: Colors.grey[800],
-            textColor: Colors.white);
+        Fluttertoast.showToast(msg: 'Successfully logged in!');
       } else {
         await _googleSignIn.signOut();
         Navigator.pop(context);
         Fluttertoast.showToast(
             msg:
-                'Your college is not yet registered!\nPlease contact your college administrator.',
-            backgroundColor: Colors.grey[800],
-            textColor: Colors.white);
+                'Your college is not yet registered!\nPlease contact your college administrator.');
       }
+    } on FirebaseAuthException catch (error) {
+      Navigator.pop(context);
+      Fluttertoast.showToast(msg: error.message);
     } on PlatformException catch (error) {
       Navigator.pop(context);
-      Fluttertoast.showToast(
-          msg: 'ERROR : ' + error.message,
-          backgroundColor: Colors.grey[800],
-          textColor: Colors.white);
-    } catch (error) {
-      print(error);
+      Fluttertoast.showToast(msg: error.message);
+    } catch (_) {
+      Navigator.pop(context);
+      Fluttertoast.showToast(msg: 'Something went wrong!');
+    }
+  }
+
+  static Future<void> resetPassword(
+      BuildContext context, String oldPassword, String newPassword) async {
+    try {
+      DefaultDialogBox.loadingDialog(context, title: 'Please wait...');
+      final userCred = await FirebaseAuth.instance.currentUser
+          .reauthenticateWithCredential(EmailAuthProvider.credential(
+              email: firebaseuser.email, password: oldPassword));
+      firebaseuser = userCred.user;
+      await FirebaseAuth.instance.currentUser.updatePassword(newPassword);
+      await Database.updateUserData({'pwd': newPassword});
       Navigator.pop(context);
       Fluttertoast.showToast(
-          msg: 'Something went wrong!',
+          msg: 'Password reset successful!',
           backgroundColor: Colors.grey[800],
           textColor: Colors.white);
+    } on FirebaseAuthException catch (error) {
+      Navigator.pop(context);
+      Fluttertoast.showToast(msg: error.message);
+    } on PlatformException catch (error) {
+      Navigator.pop(context);
+      Fluttertoast.showToast(msg: error.message);
+    } catch (error) {
+      Navigator.pop(context);
+      Fluttertoast.showToast(msg: 'Something went wrong!');
     }
   }
 
@@ -109,22 +127,16 @@ class Authentication {
       Navigator.of(context).pushAndRemoveUntil(
           CustomSlideRoute(DeciderScreen(), begin: Offset(0, -1)),
           (route) => false);
-      Fluttertoast.showToast(
-          msg: 'Successfully logged out!',
-          backgroundColor: Colors.grey[800],
-          textColor: Colors.white);
+      Fluttertoast.showToast(msg: 'Successfully logged out!');
+    } on FirebaseAuthException catch (error) {
+      Navigator.pop(context);
+      Fluttertoast.showToast(msg: error.message);
     } on PlatformException catch (error) {
       Navigator.pop(context);
-      Fluttertoast.showToast(
-          msg: 'ERROR : ' + error.message,
-          backgroundColor: Colors.grey[800],
-          textColor: Colors.white);
+      Fluttertoast.showToast(msg: error.message);
     } catch (error) {
       Navigator.pop(context);
-      Fluttertoast.showToast(
-          msg: 'Something went wrong!',
-          backgroundColor: Colors.grey[800],
-          textColor: Colors.white);
+      Fluttertoast.showToast(msg: 'Something went wrong!');
     }
   }
 }

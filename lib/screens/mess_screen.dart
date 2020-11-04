@@ -33,25 +33,21 @@ class _MessScreenState extends State<MessScreen> {
         fontWeight: FontWeight.w600);
   }
 
-  Widget _getTabViewWidget() {
+  Widget _getTabViewWidget(FoodTime time, String timing) {
+    final list = getSelectedTimeFood(messMenuItems, time);
     return ListView.builder(
       physics: BouncingScrollPhysics(),
-      itemCount: messMenuItems.length + 2,
+      itemCount: list.length + 2,
       itemBuilder: (context, index) {
         if (index == 0)
           return Container(
             alignment: Alignment.center,
             margin: EdgeInsets.only(bottom: 10),
-            child: Text(
-                DefaultTabController.of(context).index == 0
-                    ? '7:00 AM - 8:30 AM'
-                    : DefaultTabController.of(context).index == 1
-                        ? '12:00 PM - 2:30 PM'
-                        : '7:00 PM - 9:00 PM',
+            child: Text(timing,
                 style: TextStyle(
                     color: Colors.black, fontWeight: FontWeight.w600)),
           );
-        if (index == messMenuItems.length + 1)
+        if (index == list.length + 1)
           return Padding(
             padding:
                 const EdgeInsets.only(left: 10, right: 10, bottom: 90, top: 20),
@@ -63,7 +59,7 @@ class _MessScreenState extends State<MessScreen> {
                 icon: Icon(Icons.rate_review, size: 28),
                 onPressed: () {}),
           );
-        return MessItem(messMenuItems[index - 1]);
+        return MessItem(list[index - 1]);
       },
     );
   }
@@ -228,9 +224,9 @@ class _MessScreenState extends State<MessScreen> {
               preferredSize: Size(_size.width, _size.height * 0.135)),
           body: TabBarView(
             children: [
-              _getTabViewWidget(),
-              _getTabViewWidget(),
-              _getTabViewWidget(),
+              _getTabViewWidget(FoodTime.Breakfast, '7:00 AM - 8:30 AM'),
+              _getTabViewWidget(FoodTime.Lunch, '12:00 PM - 2:30 PM'),
+              _getTabViewWidget(FoodTime.Dinner, '7:00 PM - 9:00 PM'),
             ],
           )),
     );

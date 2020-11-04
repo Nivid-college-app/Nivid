@@ -1,3 +1,4 @@
+import 'package:Nivid/services/database.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,6 @@ import 'package:Nivid/widgets/video_post.dart';
 import 'package:video_player/video_player.dart';
 
 class NewsDetailScreen extends StatelessWidget {
-  static const routeName = '\NewsDetailScreen';
   final NewsFeed feed;
   NewsDetailScreen(this.feed);
   static Size size;
@@ -71,13 +71,36 @@ class NewsDetailScreen extends StatelessWidget {
                       Row(
                         children: [
                           CircleAvatar(
-                              backgroundImage: feed.userImageLink == null
-                                  ? AssetImage('assets/images/iiitk.jpg')
-                                  : NetworkImage(feed.userImageLink)),
+                            backgroundColor: Theme.of(context).primaryColor,
+                            radius: 27,
+                            child: FutureBuilder(
+                              future: Database.getCollegePicture(feed.uid),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting)
+                                  return CircleAvatar(
+                                      radius: 25,
+                                      backgroundColor: Colors.white,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(12.0),
+                                        child: CircularProgressIndicator(),
+                                      ));
+                                return CircleAvatar(
+                                    radius: 25,
+                                    backgroundColor: Colors.white,
+                                    backgroundImage: snapshot.data == null
+                                        ? AssetImage(
+                                            'assets/images/college.jpg')
+                                        : NetworkImage(snapshot.data));
+                              },
+                            ),
+                          ),
                           SizedBox(width: 10),
                           Text(feed.userName,
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.white))
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500))
                         ],
                       )
                     ],

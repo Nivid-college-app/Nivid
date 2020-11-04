@@ -5,7 +5,6 @@ class HomePost {
   String id;
   String uid;
   String userName;
-  String userImageLink;
   bool isVideo;
   bool isText;
   String videoLink;
@@ -20,7 +19,6 @@ class HomePost {
       {@required this.id,
       @required this.uid,
       @required this.userName,
-      @required this.userImageLink,
       this.isVideo = false,
       this.isText = false,
       @required this.videoLink,
@@ -35,7 +33,6 @@ class HomePost {
     this.id = doc['id'];
     this.uid = doc['uid'];
     this.userName = doc['usrNm'];
-    this.userImageLink = doc['uil'];
     this.isVideo = doc['isVid'];
     this.isText = doc['isTxt'];
     this.videoLink = doc['vidLnk'];
@@ -51,7 +48,6 @@ class HomePost {
         'id': this.id,
         'uid': this.uid,
         'usrNm': this.userName,
-        'uil': this.userImageLink,
         'isVid': this.isVideo,
         'isTxt': this.isText,
         'vidLnk': this.videoLink,

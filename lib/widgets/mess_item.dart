@@ -47,18 +47,23 @@ class _MessItemState extends State<MessItem> {
       child: Row(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.horizontal(left: Radius.circular(15)),
-            child: FadeInImage(
-                height: _size.width * 0.2,
-                width: _size.width * 0.2,
-                fit: BoxFit.fill,
-                placeholder: AssetImage('assets/images/m3.png'),
-                image: NetworkImage(widget.item.imageLink)),
-          ),
+              borderRadius: BorderRadius.horizontal(left: Radius.circular(15)),
+              child: widget.item.imageLink != null
+                  ? FadeInImage(
+                      height: _size.width * 0.2,
+                      width: _size.width * 0.2,
+                      fit: BoxFit.fill,
+                      placeholder: AssetImage('assets/images/m3.png'),
+                      image: NetworkImage(widget.item.imageLink))
+                  : Image.asset(
+                      'assets/images/m3.png',
+                      height: _size.width * 0.2,
+                      width: _size.width * 0.2,
+                      fit: BoxFit.fill,
+                    )),
           Expanded(
               child: Padding(
-                  padding:
-                      const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

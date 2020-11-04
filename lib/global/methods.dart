@@ -13,7 +13,7 @@ String convertDateToReadableString(DateTime time) {
               : currentTime.difference(time) >= Duration(hours: 1) &&
                       currentTime.difference(time) < Duration(hours: 2)
                   ? '1 hour ago'
-                  : currentTime.difference(time) < Duration(hours: 12)
+                  : currentTime.difference(time) < Duration(hours: 24)
                       ? currentTime.difference(time).inHours.toString() +
                           ' hours ago'
                       : currentTime.difference(time) >= Duration(days: 1) &&

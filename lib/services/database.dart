@@ -22,6 +22,14 @@ class Database {
     userData = AppUser.fromMap(_doc.data());
   }
 
+  static Future<void> updateUserData(Map<String, dynamic> data) async {
+    await FirebaseFirestore.instance
+        .collection('appUsers')
+        .doc(firebaseuser.uid)
+        .update(data);
+    getUserData();
+  }
+
   static Future<String> getCollegePicture(String id) async {
     final doc =
         await FirebaseFirestore.instance.collection('appUsers').doc(id).get();

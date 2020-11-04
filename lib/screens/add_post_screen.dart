@@ -61,7 +61,6 @@ class _AddPostScreenState extends State<AddPostScreen> {
                       id: null,
                       uid: userData.id,
                       userName: userData.name,
-                      userImageLink: userData.profileImageLink,
                       videoLink:
                           _hasVideoFiles ? _selectedFiles.first.path : null,
                       imagelinks: _hasImageFiles
@@ -101,7 +100,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                         child: CircleAvatar(
                             backgroundImage: userData.profileImageLink != null
                                 ? NetworkImage(userData.profileImageLink)
-                                : AssetImage('assets/images/iiitk.jpg'),
+                                : AssetImage('assets/images/college.jpg'),
                             radius: 25,
                             backgroundColor: Colors.white),
                       ),
@@ -248,7 +247,7 @@ class VideoPreview extends StatelessWidget {
               child: CircleAvatar(
                   backgroundImage: userData.profileImageLink != null
                       ? NetworkImage(userData.profileImageLink)
-                      : AssetImage('assets/images/iiitk.jpg'),
+                      : AssetImage('assets/images/college.jpg'),
                   radius: 25,
                   backgroundColor: Colors.white),
             ),
@@ -304,7 +303,7 @@ class _ImagePreviewState extends State<ImagePreview> {
               child: CircleAvatar(
                   backgroundImage: userData.profileImageLink != null
                       ? NetworkImage(userData.profileImageLink)
-                      : AssetImage('assets/images/iiitk.jpg'),
+                      : AssetImage('assets/images/college.jpg'),
                   radius: 25,
                   backgroundColor: Colors.white),
             ),

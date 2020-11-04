@@ -1,4 +1,3 @@
-import 'package:Nivid/global/variables.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -6,6 +5,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:Nivid/global/methods.dart';
 import 'package:Nivid/models/home_post.dart';
+import 'package:Nivid/global/variables.dart';
+import 'package:Nivid/services/database.dart';
 
 class PostLeading extends StatefulWidget {
   final HomePost post;
@@ -39,12 +40,25 @@ class _PostLeadingState extends State<PostLeading> {
             leading: CircleAvatar(
               backgroundColor: Theme.of(context).primaryColor,
               radius: 22,
-              child: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.white,
-                  backgroundImage: widget.post.userImageLink == null
-                      ? AssetImage('assets/images/iiitk.jpg')
-                      : NetworkImage(widget.post.userImageLink)),
+              child: FutureBuilder(
+                future: Database.getCollegePicture(widget.post.uid),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting)
+                    return CircleAvatar(
+                        radius: 20,
+                        backgroundColor: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: CircularProgressIndicator(),
+                        ));
+                  return CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.white,
+                      backgroundImage: snapshot.data == null
+                          ? AssetImage('assets/images/college.jpg')
+                          : NetworkImage(snapshot.data));
+                },
+              ),
             ),
             title: Text(widget.post.userName,
                 style: TextStyle(fontWeight: FontWeight.bold)),

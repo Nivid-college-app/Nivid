@@ -1,10 +1,10 @@
-import 'package:Nivid/services/database.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:Nivid/global/variables.dart';
+import 'package:Nivid/services/database.dart';
 import 'package:Nivid/screens/mess_screen.dart';
 import 'package:Nivid/screens/login_screen.dart';
 import 'package:Nivid/screens/signup_screen.dart';
@@ -15,7 +15,9 @@ import 'package:Nivid/screens/add_post_screen.dart';
 import 'package:Nivid/screens/academics_screen.dart';
 import 'package:Nivid/screens/home_feed_screen.dart';
 import 'package:Nivid/screens/news_feed_screen.dart';
+import 'package:Nivid/screens/time_table_screen.dart';
 import 'package:Nivid/screens/bottom_tabs_screen.dart';
+import 'package:Nivid/screens/update_mess_menu_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -64,9 +66,11 @@ class MyApp extends StatelessWidget {
         MessScreen.routeName: (ctx) => MessScreen(),
         GalleryScreen.routeName: (ctx) => GalleryScreen(),
         BottomTabsScreen.routeName: (ctx) => BottomTabsScreen(),
-        AcademicsScreen.routeName: (ctx) => AcademicsScreen(),
         AddPostScreen.routeName: (ctx) => AddPostScreen(),
         AddNewsScreen.routeName: (ctx) => AddNewsScreen(),
+        AcademicsScreen.routeName: (ctx) => AcademicsScreen(),
+        TimeTableScreen.routeName: (ctx) => TimeTableScreen(),
+        UpdateMessMenuScreen.routeName: (ctx) => UpdateMessMenuScreen(),
       },
     );
   }

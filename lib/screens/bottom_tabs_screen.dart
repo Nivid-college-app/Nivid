@@ -59,7 +59,6 @@ class _BottomTabsScreenState extends State<BottomTabsScreen> {
         });
       },
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         appBar:
             AppBar(title: Text(['Home', 'News', 'Mess', 'Gallery'][_selected])),

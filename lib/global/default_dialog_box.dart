@@ -16,6 +16,7 @@ class DefaultDialogBox {
           content: Text(content),
           actions: <Widget>[
             IconButton(
+              color: Theme.of(context).primaryColor,
               icon: Icon(FlutterIcons.check_circle_faw),
               onPressed:
                   function != null ? function : () => Navigator.of(ctx).pop(),
