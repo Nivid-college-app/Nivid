@@ -1,10 +1,13 @@
-import 'package:Nivid/services/database.dart';
-import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-import 'package:Nivid/models/news_feed.dart';
-import 'package:Nivid/widgets/video_post.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
+import 'package:flutter_linkify/flutter_linkify.dart';
+
+import 'package:Nivid/models/news_feed.dart';
+import 'package:Nivid/services/database.dart';
+import 'package:Nivid/widgets/video_post.dart';
 
 class NewsDetailScreen extends StatelessWidget {
   final NewsFeed feed;
@@ -111,6 +114,13 @@ class NewsDetailScreen extends StatelessWidget {
           Container(
               margin: EdgeInsets.symmetric(horizontal: 15, vertical: 30),
               child: Linkify(
+                  onOpen: (link) async {
+                    if (await canLaunch(link.url)) {
+                      await launch(link.url, enableJavaScript: true);
+                    } else {
+                      Fluttertoast.showToast(msg: 'Could not launch $link');
+                    }
+                  },
                   text: feed.description,
                   style: TextStyle(fontSize: 16, fontFamily: 'Quicksand'))),
         ],

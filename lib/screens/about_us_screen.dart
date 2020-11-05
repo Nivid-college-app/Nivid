@@ -1,9 +1,13 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutUsScreen extends StatelessWidget {
   static const routeName = '\AboutUsScreen';
 
-  Widget getDeveloperProfileWidget(String name, String image) {
+  Widget getDeveloperProfileWidget(String name, String image, String link) {
+    TapGestureRecognizer recognizer = TapGestureRecognizer();
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 4),
       padding: const EdgeInsets.all(8),
@@ -20,6 +24,7 @@ class AboutUsScreen extends StatelessWidget {
         RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
+                recognizer: recognizer..onTap = () => launchProfileLink(link),
                 text: name,
                 style: TextStyle(
                     color: Colors.blue,
@@ -48,6 +53,14 @@ class AboutUsScreen extends StatelessWidget {
     );
   }
 
+  Future<void> launchProfileLink(String link) async {
+    if (await canLaunch(link)) {
+      await launch(link, enableJavaScript: true);
+    } else {
+      Fluttertoast.showToast(msg: 'Could not launch profile');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,16 +71,24 @@ class AboutUsScreen extends StatelessWidget {
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2, childAspectRatio: 0.75),
           children: [
+            getDeveloperProfileWidget('Muskan Rana', 'assets/images/muskan.jpg',
+                'https://www.linkedin.com/in/muskan-rana-a3900917b/'),
             getDeveloperProfileWidget(
-                'Muskan Rana', 'assets/images/bhaskar.jpg'),
+                'Bhaskar Purohit',
+                'assets/images/bhaskar.jpg',
+                'https://www.linkedin.com/in/bhaskar-purohit-29856a192/'),
             getDeveloperProfileWidget(
-                'Bhaskar Purohit', 'assets/images/bhaskar.jpg'),
+                'Nikhil Kumar Ghanghor',
+                'assets/images/nikhil.jpg',
+                'https://www.linkedin.com/in/nikhil-kumar-ghanghor-05210a170/'),
             getDeveloperProfileWidget(
-                'Nikhil Kumar Ghanghor', 'assets/images/nikhil.jpg'),
+                'Kaushal Samanth',
+                'assets/images/kaushal.jpg',
+                'https://www.linkedin.com/in/kaushal-samant-8a527b19b/'),
             getDeveloperProfileWidget(
-                'Kaushal Samanth', 'assets/images/kaushal.jpg'),
-            getDeveloperProfileWidget(
-                'Sai Bhavadeesh Yarlagadda', 'assets/images/bhavadeesh.jpg'),
+                'Sai Bhavadeesh Yarlagadda',
+                'assets/images/bhavadeesh.jpg',
+                'https://www.linkedin.com/in/sai-bhavadeesh-yarlagadda-58200917b/'),
           ],
         ));
   }
