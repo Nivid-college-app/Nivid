@@ -5,11 +5,12 @@ import 'package:url_launcher/url_launcher.dart';
 
 class AboutUsScreen extends StatelessWidget {
   static const routeName = '\AboutUsScreen';
+  static Size size;
 
   Widget getDeveloperProfileWidget(String name, String image, String link) {
     TapGestureRecognizer recognizer = TapGestureRecognizer();
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 4),
+      width: size.width * 0.5 - 4,
       padding: const EdgeInsets.all(8),
       child: Column(children: [
         CircleAvatar(
@@ -39,10 +40,7 @@ class AboutUsScreen extends StatelessWidget {
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.w600,
-                                fontSize: 16)),
-                        TextSpan(
-                            text: '\nB-Tech [ 2018 - 2022 ]',
-                            style: TextStyle(color: Colors.green))
+                                fontSize: 16))
                       ],
                       style: TextStyle(
                           color: Colors.black,
@@ -63,32 +61,37 @@ class AboutUsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(title: Text('Developers')),
-        body: GridView(
+        body: ListView(
           physics: BouncingScrollPhysics(),
           padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2, childAspectRatio: 0.75),
           children: [
-            getDeveloperProfileWidget('Muskan Rana', 'assets/images/muskan.jpg',
-                'https://www.linkedin.com/in/muskan-rana-a3900917b/'),
+            Row(children: [
+              getDeveloperProfileWidget(
+                  'Sai Bhavadeesh Yarlagadda',
+                  'assets/images/bhavadeesh.jpg',
+                  'https://www.linkedin.com/in/sai-bhavadeesh-yarlagadda-58200917b/'),
+              getDeveloperProfileWidget(
+                  'Nikhil Kumar Ghanghor',
+                  'assets/images/nikhil.jpg',
+                  'https://www.linkedin.com/in/nikhil-kumar-ghanghor-05210a170/'),
+            ]),
+            Row(children: [
+              getDeveloperProfileWidget(
+                  'Kaushal Samant',
+                  'assets/images/kaushal.jpg',
+                  'https://www.linkedin.com/in/kaushal-samant-8a527b19b/'),
+              getDeveloperProfileWidget(
+                  'Muskan Rana',
+                  'assets/images/muskan.jpg',
+                  'https://www.linkedin.com/in/muskan-rana-a3900917b/'),
+            ]),
             getDeveloperProfileWidget(
                 'Bhaskar Purohit',
                 'assets/images/bhaskar.jpg',
                 'https://www.linkedin.com/in/bhaskar-purohit-29856a192/'),
-            getDeveloperProfileWidget(
-                'Nikhil Kumar Ghanghor',
-                'assets/images/nikhil.jpg',
-                'https://www.linkedin.com/in/nikhil-kumar-ghanghor-05210a170/'),
-            getDeveloperProfileWidget(
-                'Kaushal Samanth',
-                'assets/images/kaushal.jpg',
-                'https://www.linkedin.com/in/kaushal-samant-8a527b19b/'),
-            getDeveloperProfileWidget(
-                'Sai Bhavadeesh Yarlagadda',
-                'assets/images/bhavadeesh.jpg',
-                'https://www.linkedin.com/in/sai-bhavadeesh-yarlagadda-58200917b/'),
           ],
         ));
   }

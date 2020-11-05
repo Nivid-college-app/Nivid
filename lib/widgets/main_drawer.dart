@@ -50,7 +50,7 @@ class MainDrawer extends StatelessWidget {
         context: context,
         builder: (context) => AlertDialog(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
+                  borderRadius: BorderRadius.circular(5)),
               content: Form(
                   key: _formKey,
                   child: Column(
