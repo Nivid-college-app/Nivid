@@ -1,4 +1,3 @@
-import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:Nivid/widgets/mess_item.dart';
 import 'package:Nivid/models/mess_menu_item.dart';
@@ -17,12 +16,34 @@ class _MessScreenState extends State<MessScreen> {
   @override
   void initState() {
     super.initState();
+    _day = DateTime.now().weekday - 1;
     if (DateTime.now().hour >= 10 && DateTime.now().hour < 15)
       _selected = 1;
     else if (DateTime.now().hour >= 15 && DateTime.now().hour < 21)
       _selected = 2;
     else
       _selected = 0;
+  }
+
+  String _getDayFromIndex(int ind) {
+    switch (ind) {
+      case 0:
+        return 'Monday';
+      case 1:
+        return 'Tuesday';
+      case 2:
+        return 'Wednesday';
+      case 3:
+        return 'Thursday';
+      case 4:
+        return 'Friday';
+      case 5:
+        return 'Saturday';
+      case 6:
+        return 'Sunday';
+      default:
+        return '';
+    }
   }
 
   TextStyle _dayTextStyle(int index) {
@@ -34,9 +55,8 @@ class _MessScreenState extends State<MessScreen> {
   }
 
   Widget _getTabViewWidget(FoodTime time, String timing) {
-    final list = getSelectedTimeFood(messMenuItems, time);
+    final list = getSelectedTimeFood(messMenuItems, time, _day);
     return ListView.builder(
-      physics: BouncingScrollPhysics(),
       itemCount: list.length + 2,
       itemBuilder: (context, index) {
         if (index == 0)
@@ -52,6 +72,7 @@ class _MessScreenState extends State<MessScreen> {
             padding:
                 const EdgeInsets.only(left: 10, right: 10, bottom: 90, top: 20),
             child: FloatingActionButton.extended(
+                foregroundColor: Colors.white,
                 backgroundColor: Theme.of(context).primaryColor,
                 label: Text('Give your precious review.',
                     style:
@@ -91,52 +112,48 @@ class _MessScreenState extends State<MessScreen> {
                     Navigator.pop(ctx);
                   },
                   child: Container(
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                    padding: const EdgeInsets.all(8),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            colors: _day == index
-                                ? [
-                                    Theme.of(context)
-                                        .primaryColor
-                                        .withOpacity(0.5),
-                                    Theme.of(context)
-                                        .primaryColor
-                                        .withOpacity(0.7),
-                                    Theme.of(context)
-                                        .primaryColor
-                                        .withOpacity(0.9),
-                                  ]
-                                : [
-                                    Theme.of(context)
-                                        .accentColor
-                                        .withOpacity(0.5),
-                                    Theme.of(context)
-                                        .accentColor
-                                        .withOpacity(0.7),
-                                    Theme.of(context)
-                                        .accentColor
-                                        .withOpacity(0.9),
-                                  ],
-                            tileMode: TileMode.mirror),
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.black26,
-                              offset: Offset(0, 3),
-                              blurRadius: 3)
-                        ],
-                        color: _day == index
-                            ? Theme.of(context).primaryColor
-                            : Colors.grey[350],
-                        borderRadius: BorderRadius.circular(30)),
-                    child: Text(
-                      DateFormat('EEEE')
-                          .format(DateTime.now().add(Duration(days: index))),
-                      style: _dayTextStyle(index),
-                    ),
-                  ),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 16),
+                      padding: const EdgeInsets.all(8),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              colors: _day == index
+                                  ? [
+                                      Theme.of(context)
+                                          .primaryColor
+                                          .withOpacity(0.5),
+                                      Theme.of(context)
+                                          .primaryColor
+                                          .withOpacity(0.7),
+                                      Theme.of(context)
+                                          .primaryColor
+                                          .withOpacity(0.9),
+                                    ]
+                                  : [
+                                      Theme.of(context)
+                                          .accentColor
+                                          .withOpacity(0.5),
+                                      Theme.of(context)
+                                          .accentColor
+                                          .withOpacity(0.7),
+                                      Theme.of(context)
+                                          .accentColor
+                                          .withOpacity(0.9),
+                                    ],
+                              tileMode: TileMode.mirror),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.black26,
+                                offset: Offset(0, 3),
+                                blurRadius: 3)
+                          ],
+                          color: _day == index
+                              ? Theme.of(context).primaryColor
+                              : Colors.grey[350],
+                          borderRadius: BorderRadius.circular(30)),
+                      child: Text(_getDayFromIndex(index),
+                          style: _dayTextStyle(index))),
                 ),
             itemCount: 7),
       ],
@@ -180,9 +197,7 @@ class _MessScreenState extends State<MessScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                              DateFormat('EEEE').format(
-                                  DateTime.now().add(Duration(days: _day))),
+                          Text(_getDayFromIndex(_day),
                               style: _dayTextStyle(null)),
                           Icon(Icons.arrow_circle_down, color: Colors.blue),
                         ],

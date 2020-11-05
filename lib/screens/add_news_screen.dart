@@ -29,6 +29,7 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
   File _pickedFile;
   bool _isVideo = false;
   List _files;
+  bool _isGlobal = false;
 
   Widget _getTitleText(String title, BuildContext context) {
     return Padding(
@@ -79,6 +80,8 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
                     uid: firebaseuser.uid,
                     userName: userData.name,
                     downloadLink: _pickedFile.path,
+                    isGlobal: _isGlobal,
+                    isVideo: _isVideo,
                     headLine: _headlineCtrl.text,
                     description: _descriptionCtrl.text,
                     type: _selected,
@@ -88,7 +91,7 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
                 Fluttertoast.showToast(msg: 'No image / video file found');
             },
             icon: Icon(Icons.send_outlined),
-            label: Text('send'))
+            label: Text('Send'))
       ]),
       body: Form(
         key: _formKey,
@@ -112,7 +115,23 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: Text(userData.college, style: TextStyle(fontSize: 18)),
-              )
+              ),
+              Expanded(child: SizedBox()),
+              Row(children: [
+                Text('College'),
+                Switch(
+                    value: _isGlobal,
+                    activeColor: Theme.of(context).primaryColor,
+                    activeTrackColor: Theme.of(context).accentColor,
+                    inactiveThumbColor: Theme.of(context).primaryColor,
+                    inactiveTrackColor: Theme.of(context).accentColor,
+                    onChanged: (value) {
+                      setState(() {
+                        _isGlobal = !_isGlobal;
+                      });
+                    }),
+                Text('Global'),
+              ]),
             ]),
             _getTitleText('Head line', context),
             Padding(
@@ -182,6 +201,7 @@ class _AddNewsScreenState extends State<AddNewsScreen> {
                                       begin: Offset(1, 0)))
                                   .then((value) {
                                 setState(() {
+                                  _isVideo = false;
                                   _pickedFile = value;
                                 });
                               });

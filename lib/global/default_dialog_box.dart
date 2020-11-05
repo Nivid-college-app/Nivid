@@ -5,6 +5,7 @@ import 'package:flutter_icons/flutter_icons.dart';
 class DefaultDialogBox {
   static Future<dynamic> errorDialog(BuildContext context,
       {String title = 'Failed !',
+      bool isIcon = true,
       String content = 'Something went wrong !\nPlease try again.',
       Function function}) {
     return showDialog(
@@ -15,12 +16,40 @@ class DefaultDialogBox {
           title: Text(title),
           content: Text(content),
           actions: <Widget>[
-            IconButton(
-              color: Theme.of(context).primaryColor,
-              icon: Icon(FlutterIcons.check_circle_faw),
-              onPressed:
-                  function != null ? function : () => Navigator.of(ctx).pop(),
-            ),
+            isIcon
+                ? Row(
+                    children: [
+                      IconButton(
+                        color: Theme.of(context).primaryColor,
+                        icon: Icon(FlutterIcons.check_circle_faw),
+                        onPressed: function != null
+                            ? function
+                            : () => Navigator.of(ctx).pop(),
+                      ),
+                    ],
+                  )
+                : Row(
+                    children: [
+                      FlatButton(
+                          textColor: Theme.of(context).primaryColor,
+                          onPressed: () => Navigator.of(ctx).pop(),
+                          child: Text(
+                            'NO',
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w600),
+                          )),
+                      FlatButton(
+                          textColor: Theme.of(context).primaryColor,
+                          onPressed: function != null
+                              ? function
+                              : () => Navigator.of(ctx).pop(),
+                          child: Text(
+                            'YES',
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w600),
+                          )),
+                    ],
+                  ),
           ],
         ),
       ),

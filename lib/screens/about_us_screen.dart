@@ -63,7 +63,7 @@ class AboutUsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     size = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: AppBar(title: Text('Developers')),
+        appBar: AppBar(title: Text('Our Team')),
         body: ListView(
           physics: BouncingScrollPhysics(),
           padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),

@@ -81,7 +81,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                 }
               },
               icon: Icon(Icons.send_outlined),
-              label: Text('send'))
+              label: Text('Send'))
         ],
       ),
       body: _hasImageFiles

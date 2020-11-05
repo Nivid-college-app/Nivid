@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:Nivid/global/variables.dart';
 
 enum NewsType {
   General,
@@ -41,7 +40,7 @@ NewsType toEnum(String type) {
     case 'SCIENCE':
       return NewsType.Science;
     case 'SPORTS':
-      return NewsType.Social;
+      return NewsType.Sports;
     case 'ENTERTAINMENT':
       return NewsType.Entertainment;
     default:
@@ -57,6 +56,7 @@ class NewsFeed {
   String headLine;
   String description;
   bool isVideo;
+  bool isGlobal;
   NewsType type;
   DateTime timePosted;
 
@@ -66,6 +66,7 @@ class NewsFeed {
     @required this.userName,
     @required this.downloadLink,
     this.isVideo = false,
+    this.isGlobal = false,
     @required this.headLine,
     @required this.description,
     @required this.type,
@@ -78,6 +79,7 @@ class NewsFeed {
     this.userName = doc['usrnm'];
     this.downloadLink = doc['dllnk'];
     this.isVideo = doc['isVid'];
+    this.isGlobal = doc['isGbl'];
     this.headLine = doc['hdln'];
     this.description = doc['desc'];
     this.type = toEnum(doc['type']);
@@ -90,6 +92,7 @@ class NewsFeed {
         'usrnm': this.userName,
         'dllnk': this.downloadLink,
         'isVid': this.isVideo,
+        'isGbl': this.isGlobal,
         'hdln': this.headLine,
         'desc': this.description,
         'type': toValueString(this.type),
@@ -104,10 +107,14 @@ Future<List<NewsFeed>> getAllNewsfeeds({bool isCollege = false}) async {
       .get();
   if (isCollege) {
     return snap.docs.map((e) {
-      if (e.data()['uid'] == userData.collegeId) {
+      if (!e.data()['isGbl']) {
         return NewsFeed.fromMap(e.data());
       }
     }).toList();
   }
-  return snap.docs.map((e) => NewsFeed.fromMap(e.data())).toList();
+  return snap.docs.map((e) {
+    if (e.data()['isGbl']) {
+      return NewsFeed.fromMap(e.data());
+    }
+  }).toList();
 }

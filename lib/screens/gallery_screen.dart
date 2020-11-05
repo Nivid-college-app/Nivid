@@ -16,7 +16,17 @@ class _GalleryScreenState extends State<GalleryScreen> {
         ? Container()
         : Container(
             child: Center(
-              child: Image.asset('assets/images/Google_photos.jpg'),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Image.asset('assets/images/Google_photos.jpg'),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child:
+                        Text('Coming soon...', style: TextStyle(fontSize: 20)),
+                  )
+                ],
+              ),
             ),
           );
   }

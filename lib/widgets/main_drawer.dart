@@ -24,6 +24,7 @@ class MainDrawer extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         width: size.width,
+        color: Colors.transparent,
         height: top * 1.75,
         child: Row(
           children: [
@@ -146,7 +147,7 @@ class MainDrawer extends StatelessWidget {
                     color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 0.5)),
-            subtitle: Text('Hello ${userData.name}, welcome!',
+            subtitle: Text('Hello ${userData.name}, Welcome!',
                 style: TextStyle(fontSize: 16)),
           ),
           Divider(thickness: 1, color: Colors.blueGrey),
@@ -175,7 +176,8 @@ class MainDrawer extends StatelessWidget {
               icon: Icons.power_settings_new,
               onPressed: () => DefaultDialogBox.errorDialog(context,
                   title: 'Are you sure!',
-                  content: 'you want to logout?',
+                  content: 'You want to Logout?',
+                  isIcon: false,
                   function: () => Authentication.logout(context))),
           Divider(thickness: 1, height: 5),
           getDrawerButton(context,
