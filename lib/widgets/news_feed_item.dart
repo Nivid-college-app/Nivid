@@ -14,6 +14,7 @@ class NewsFeedItem extends StatelessWidget {
     size = MediaQuery.of(context).size;
     final _time = convertDateToReadableString(feed.timePosted);
     return GestureDetector(
+      key: ValueKey(feed.id),
       onTap: () =>
           Navigator.of(context).push(CustomSlideRoute(NewsDetailScreen(feed))),
       child: Container(

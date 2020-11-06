@@ -36,6 +36,7 @@ class _MessItemState extends State<MessItem> {
   Widget build(BuildContext context) {
     _size = MediaQuery.of(context).size;
     return Container(
+      key: ValueKey(widget.item.id),
       margin: const EdgeInsets.only(left: 14, right: 14, top: 8),
       decoration: BoxDecoration(
           color: Colors.white,
@@ -83,9 +84,7 @@ class _MessItemState extends State<MessItem> {
                                   splashColor: Colors.transparent,
                                   padding: EdgeInsets.zero,
                                   icon: Icon(Icons.favorite),
-                                  color: _favourite
-                                      ? Theme.of(context).primaryColor
-                                      : Colors.grey,
+                                  color: _favourite ? Colors.red : Colors.grey,
                                   onPressed: () {
                                     setState(() {
                                       _favourite = !_favourite;

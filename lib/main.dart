@@ -1,4 +1,3 @@
-import 'package:Nivid/screens/about_us_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -11,6 +10,7 @@ import 'package:Nivid/screens/login_screen.dart';
 import 'package:Nivid/screens/signup_screen.dart';
 import 'package:Nivid/screens/decider_screen.dart';
 import 'package:Nivid/screens/gallery_screen.dart';
+import 'package:Nivid/screens/about_us_screen.dart';
 import 'package:Nivid/screens/add_news_screen.dart';
 import 'package:Nivid/screens/add_post_screen.dart';
 import 'package:Nivid/screens/academics_screen.dart';

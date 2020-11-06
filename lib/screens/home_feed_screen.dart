@@ -55,6 +55,7 @@ class _HomeFeedScreenState extends State<HomeFeedScreen> {
                           ),
                         );
                       return Container(
+                        key: ValueKey(snapshot.data[index - 1].id),
                         margin: const EdgeInsets.only(bottom: 8),
                         child: Column(
                           children: [
