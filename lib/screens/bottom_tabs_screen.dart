@@ -59,150 +59,134 @@ class _BottomTabsScreenState extends State<BottomTabsScreen> {
         });
       },
       child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar:
-            AppBar(title: Text(['Home', 'News', 'Mess', 'Gallery'][_selected])),
-        drawer: MainDrawer(),
-        body: Stack(
-          children: [
-            [
-              HomeFeedScreen(),
-              NewsFeedScreen(),
-              MessScreen(),
-              GalleryScreen()
-            ][_selected],
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: CurvedNavigationBar(
-                height: _size.height * 0.07,
-                animationDuration: Duration(milliseconds: 300),
-                buttonBackgroundColor: Theme.of(context).primaryColor,
-                color: Theme.of(context).primaryColor.withOpacity(0.75),
-                backgroundColor: Colors.transparent,
-                onTap: _onPressed,
-                index: _selected,
-                items: [
-                  _selected == 0
-                      ? FutureBuilder(
-                          future: Future.delayed(Duration(milliseconds: 150)),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting)
-                              return Icon(FlutterIcons.home_ant,
-                                  color: Colors.blueGrey[300]);
-                            return Container(
-                              height: _size.width * 0.1,
-                              alignment: Alignment.center,
-                              child: FittedBox(
-                                child: Column(
-                                  children: [
-                                    Icon(FlutterIcons.home_ant,
-                                        color: Colors.white),
-                                    Text('Home',
-                                        style: TextStyle(color: Colors.white))
-                                  ],
-                                ),
-                              ),
-                            );
-                          })
-                      : Icon(FlutterIcons.home_ant, color: Colors.white),
-                  _selected == 1
-                      ? FutureBuilder(
-                          future: Future.delayed(Duration(milliseconds: 150)),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting)
-                              return Icon(FlutterIcons.newspaper_mco,
-                                  color: Colors.blueGrey[300]);
-                            return Container(
-                              height: _size.width * 0.1,
-                              alignment: Alignment.center,
-                              child: FittedBox(
-                                child: Column(
-                                  children: [
-                                    Icon(FlutterIcons.newspaper_mco,
-                                        color: Colors.white),
-                                    Text('News',
-                                        style: TextStyle(color: Colors.white))
-                                  ],
-                                ),
-                              ),
-                            );
-                          })
-                      : Icon(FlutterIcons.newspaper_mco, color: Colors.white),
-                  _selected == 2
-                      ? FutureBuilder(
-                          future: Future.delayed(Duration(milliseconds: 150)),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting)
-                              return Icon(Icons.restaurant_menu,
-                                  color: Colors.blueGrey[300]);
-                            return Container(
-                              height: _size.width * 0.1,
-                              alignment: Alignment.center,
-                              child: FittedBox(
-                                child: Column(
-                                  children: [
-                                    Icon(Icons.restaurant_menu,
-                                        color: Colors.white),
-                                    Text('Mess',
-                                        style: TextStyle(color: Colors.white))
-                                  ],
-                                ),
-                              ),
-                            );
-                          })
-                      : Icon(Icons.restaurant_menu, color: Colors.white),
-                  _selected == 3
-                      ? FutureBuilder(
-                          future: Future.delayed(Duration(milliseconds: 150)),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting)
-                              return Icon(FlutterIcons.google_photos_mco,
-                                  color: Colors.blueGrey[300]);
-                            return Container(
-                              height: _size.width * 0.1,
-                              alignment: Alignment.center,
-                              child: FittedBox(
-                                child: Column(
-                                  children: [
-                                    Icon(FlutterIcons.google_photos_mco,
-                                        color: Colors.white),
-                                    Text('Gallery',
-                                        style: TextStyle(color: Colors.white))
-                                  ],
-                                ),
-                              ),
-                            );
-                          })
-                      : Icon(FlutterIcons.google_photos_mco,
-                          color: Colors.white),
-                ],
-              ),
-            ),
-            if ((_selected == 0 || _selected == 1) && userData.isAdmin)
-              Positioned(
-                  bottom: 70,
-                  right: 5,
-                  child: FloatingActionButton.extended(
-                    foregroundColor: Colors.white,
-                    label: Text(_selected == 0 ? 'Add post' : 'Update',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold)),
-                    onPressed: () => Navigator.of(context).push(
-                        CustomScaleRoute(
-                            _selected == 0 ? AddPostScreen() : AddNewsScreen(),
-                            alignment: Alignment.bottomRight)),
-                    icon: Icon(Icons.add),
-                    backgroundColor: Theme.of(context).primaryColor,
-                  ))
-          ],
-        ),
-      ),
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+              title: Text(['Home', 'News', 'Mess', 'Gallery'][_selected])),
+          drawer: MainDrawer(),
+          bottomNavigationBar: CurvedNavigationBar(
+            height: _size.height * 0.07,
+            animationDuration: Duration(milliseconds: 300),
+            buttonBackgroundColor: Theme.of(context).primaryColor,
+            color: Theme.of(context).primaryColor.withOpacity(0.75),
+            backgroundColor: Colors.transparent,
+            onTap: _onPressed,
+            index: _selected,
+            items: [
+              _selected == 0
+                  ? FutureBuilder(
+                      future: Future.delayed(Duration(milliseconds: 150)),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting)
+                          return Icon(FlutterIcons.home_ant,
+                              color: Colors.blueGrey[300]);
+                        return Container(
+                          height: _size.width * 0.1,
+                          alignment: Alignment.center,
+                          child: FittedBox(
+                            child: Column(
+                              children: [
+                                Icon(FlutterIcons.home_ant,
+                                    color: Colors.white),
+                                Text('Home',
+                                    style: TextStyle(color: Colors.white))
+                              ],
+                            ),
+                          ),
+                        );
+                      })
+                  : Icon(FlutterIcons.home_ant, color: Colors.white),
+              _selected == 1
+                  ? FutureBuilder(
+                      future: Future.delayed(Duration(milliseconds: 150)),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting)
+                          return Icon(FlutterIcons.newspaper_mco,
+                              color: Colors.blueGrey[300]);
+                        return Container(
+                          height: _size.width * 0.1,
+                          alignment: Alignment.center,
+                          child: FittedBox(
+                            child: Column(
+                              children: [
+                                Icon(FlutterIcons.newspaper_mco,
+                                    color: Colors.white),
+                                Text('News',
+                                    style: TextStyle(color: Colors.white))
+                              ],
+                            ),
+                          ),
+                        );
+                      })
+                  : Icon(FlutterIcons.newspaper_mco, color: Colors.white),
+              _selected == 2
+                  ? FutureBuilder(
+                      future: Future.delayed(Duration(milliseconds: 150)),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting)
+                          return Icon(Icons.restaurant_menu,
+                              color: Colors.blueGrey[300]);
+                        return Container(
+                          height: _size.width * 0.1,
+                          alignment: Alignment.center,
+                          child: FittedBox(
+                            child: Column(
+                              children: [
+                                Icon(Icons.restaurant_menu,
+                                    color: Colors.white),
+                                Text('Mess',
+                                    style: TextStyle(color: Colors.white))
+                              ],
+                            ),
+                          ),
+                        );
+                      })
+                  : Icon(Icons.restaurant_menu, color: Colors.white),
+              _selected == 3
+                  ? FutureBuilder(
+                      future: Future.delayed(Duration(milliseconds: 150)),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting)
+                          return Icon(FlutterIcons.google_photos_mco,
+                              color: Colors.blueGrey[300]);
+                        return Container(
+                          height: _size.width * 0.1,
+                          alignment: Alignment.center,
+                          child: FittedBox(
+                            child: Column(
+                              children: [
+                                Icon(FlutterIcons.google_photos_mco,
+                                    color: Colors.white),
+                                Text('Gallery',
+                                    style: TextStyle(color: Colors.white))
+                              ],
+                            ),
+                          ),
+                        );
+                      })
+                  : Icon(FlutterIcons.google_photos_mco, color: Colors.white),
+            ],
+          ),
+          body: [
+            HomeFeedScreen(),
+            NewsFeedScreen(),
+            MessScreen(),
+            GalleryScreen()
+          ][_selected],
+          extendBody: true,
+          floatingActionButton: (_selected == 0 || _selected == 1) &&
+                  userData.isAdmin
+              ? FloatingActionButton.extended(
+                  foregroundColor: Colors.white,
+                  label: Text(_selected == 0 ? 'Add post' : 'Update',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  onPressed: () => Navigator.of(context).push(CustomScaleRoute(
+                      _selected == 0 ? AddPostScreen() : AddNewsScreen(),
+                      alignment: Alignment.bottomRight)),
+                  icon: Icon(Icons.add),
+                  backgroundColor: Theme.of(context).primaryColor,
+                )
+              : null),
     );
   }
 }
